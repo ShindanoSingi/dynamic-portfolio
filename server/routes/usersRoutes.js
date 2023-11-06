@@ -21,7 +21,8 @@ router.post("/register", async (req, res) => {
             // Create new user
             const hashedPassword = await bcrypt.hash(req.body.password, 10);
             req.body.password = hashedPassword;
-            const newUser = await User.create(req.body);
+            const newUser = await User(req.body);
+            await newUser.save();
             return res.send({
                 message: "User created successfully",
                 success: true,
@@ -58,9 +59,19 @@ router.post("/login", async (req, res) => {
         }
 
         // Create and assign a token
-        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+        return res.send({
+            message: "Logged in successfully",
+            token: token,
+            success: true,
+        });
 
     } catch (error) {
-
+        return res.send({
+            message: error.message,
+            success: false,
+        });
     }
 });
+
+module.exports = router;

@@ -3,21 +3,21 @@ const mongoose = require("mongoose");
 const userSchema = mongoose.Schema(
       {
             firstName: { type: String, required: true },
-            lastName: { type: String, required: false },
+            lastName: { type: String, required: true },
 
-            email: { type: String, required: false },
+            email: { type: String, required: true },
             password: { type: String, required: true },
 
-            phoneNumber: { type: String, required: true },
+            phoneNumber: { type: String, required: false },
 
-            role: { type: String, required: true },
+            role: { type: String, default: 'user' },
             date: { type: Date, default: Date.now },
 
-            streetName: { type: String, required: true },
-            streetNumber: { type: String, required: true },
-            city: { type: String, required: true },
-            state: { type: String, required: true },
-            postalCode: { type: String, required: true },
+            streetName: { type: String, required: false },
+            streetNumber: { type: String, required: false },
+            city: { type: String, required: false },
+            state: { type: String, required: false },
+            postalCode: { type: String, required: false },
 
             gitHub: { type: String, required: false },
             linkedIn: { type: String, required: false },
@@ -36,12 +36,19 @@ const userSchema = mongoose.Schema(
 
 
 
-            skills: {
-                  category: {
+            skills: [ {
                         name: { type: String, required: false },
-                        skills: [String],
+                        skills: [
+                            {
+                                name: { type: String, required: false },
+                                level: { type: Number, required: false },
+                                yearsOfExperience: { type: Number, required: false },
+                                icon: { type: String, required: false },
+                            }
+                        ],
                   },
-            },
+                ],
+
             education: [
                   {
                         schoolLogo: { type: String, required: false },
@@ -52,6 +59,7 @@ const userSchema = mongoose.Schema(
                         startDate: { type: Date, required: false },
                         endDate: { type: Date, required: false },
                         description: { type: String, required: false },
+                        graduated: { type: Boolean, required: false },
                   },
             ],
 
@@ -68,9 +76,9 @@ const userSchema = mongoose.Schema(
 
             projects: [
                   {
-                        title: { type: String, required: true },
-                        problemToSolve: { type: String, required: true },
-                        description: { type: String, required: true },
+                        title: { type: String, required: false },
+                        problemToSolve: { type: String, required: false },
+                        description: { type: String, required: false },
                         skills: [String],
                         technologiesUsed: [String],
                         responsabilities: [String],
@@ -78,20 +86,20 @@ const userSchema = mongoose.Schema(
                         testimonials: [String],
                         teamMembers: [String],
                         awardsAndAchievements: [String],
-                        projectStatus: { type: String, required: true },
+                        projectStatus: { type: String, required: false },
                         clientContactInformation: {
-                              name: { type: String, required: true },
-                              email: { type: String, required: true },
-                              phoneNumber: { type: String, required: true },
+                              name: { type: String, required: false },
+                              email: { type: String, required: false },
+                              phoneNumber: { type: String, required: false },
                         },
-                        live: { type: String, required: true },
-                        gitHub: { type: String, required: true },
+                        live: { type: String, required: false },
+                        gitHub: { type: String, required: false },
                         screenshots: [String],
                         videoDemo: { type: String, required: false },
-                        imageType: { type: String, required: true },
-                        startDate: { type: Date, required: true },
-                        endDate: { type: Date, required: true },
-                        duration: { type: String, required: true },
+                        imageType: { type: String, required: false },
+                        startDate: { type: Date, required: false },
+                        endDate: { type: Date, required: false },
+                        duration: { type: String, required: false },
                         demoLoginCredentials: {
                               type: String,
                               required: false,
