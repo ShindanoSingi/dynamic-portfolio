@@ -108,4 +108,70 @@ router.get("/get-all-users", async (req, res) => {
     }
 });
 
+// Update a user
+router.put("/update-user", authMiddleware, async (req, res) => {
+    try {
+        // Check if the user is already registered
+        const user = await User.findOne({ _id: req.body.userId });
+
+        if (!user) {
+            return res.send({
+                message: "User not found",
+                success: false,
+            });
+        }
+
+        // Check if the user is the same
+        if (user._id.toString() !== req.body.userId.toString()) {
+            return res.send({
+                message: "You are not allowed to update this user",
+                success: false,
+            });
+        }
+
+        // Update user
+        const updatedUser = await User.findByIdAndUpdate(req.body.userId, req.body, { new: true });
+        return res.send({
+            message: "User updated successfully",
+            success: true,
+            user: updatedUser,
+        });
+
+    } catch (error) {
+        return res.send({
+            message: error.message,
+            success: false,
+        });
+    }
+});
+
+// Delete user if the user's role is Admin
+router.delete("/delete-user", authMiddleware, async (req, res) => {
+    try {
+        // Check if the user is already registered
+        const user = await User.findOne({ _id: req.body.userId });
+
+        // Check if the user is the Admin
+        if (user.role === "Admin") {
+            return res.send({
+                message: "You are not allowed to delete the Admin",
+                success: false,
+            });
+        }
+
+        // Delete user
+        await User.findByIdAndDelete(req.body.userId);
+        return res.send({
+            message: "User deleted successfully",
+            success: true,
+        });
+
+    } catch (error) {
+        return res.send({
+            message: error.message,
+            success: false,
+        });
+    }
+})
+
 module.exports = router;
