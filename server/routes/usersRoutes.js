@@ -145,7 +145,7 @@ router.put("/update-user", authMiddleware, async (req, res) => {
     }
 });
 
-// Delete user if the user's role is Admin
+// Delete user if role is not Admin
 router.delete("/delete-user", authMiddleware, async (req, res) => {
     try {
         // Check if the user is already registered
