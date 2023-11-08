@@ -128,7 +128,13 @@ const userSchema = mongoose.Schema(
                 email: { type: String, required: false },
                 phoneNumber: { type: String, required: false },
                 website: { type: String, required: false },
-                address: { type: String, required: false },
+                address: {
+                        streetName: { type: String, required: false },
+                        streetNumber: { type: String, required: false },
+                        city: { type: String, required: false },
+                        state: { type: String, required: false },
+                        postalCode: { type: String, required: false },
+                 },
         },
 
         resume: {
@@ -136,6 +142,14 @@ const userSchema = mongoose.Schema(
                 resumeType: { type: String, required: false },
                 resumeUrl: { type: String, required: false },
         },
+
+        socialMedia:{
+                  gitHub: { type: String, required: false },
+                  linkedIn: { type: String, required: false },
+                  twitter: { type: String, required: false },
+                  facebook: { type: String, required: false },
+                  instagram: { type: String, required: false },
+            },
     },
 
       {
