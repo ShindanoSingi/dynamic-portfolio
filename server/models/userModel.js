@@ -12,7 +12,7 @@ const userSchema = mongoose.Schema(
 
             role: { type: String, default: 'user' },
             date: { type: Date, default: Date.now },
-
+            
             streetName: { type: String, required: false },
             streetNumber: { type: String, required: false },
             city: { type: String, required: false },
@@ -31,21 +31,17 @@ const userSchema = mongoose.Schema(
 
             title: { type: String, required: false },
             description: { type: String, required: false },
-
+            stacks: { type: String, default: 'Full Stack' },
             about: { type: String, required: false },
-
-
 
             skills: [ {
                         name: { type: String, required: false },
-                        skills: [
-                            {
+                        skill: {
                                 name: { type: String, required: false },
                                 level: { type: Number, required: false },
                                 yearsOfExperience: { type: Number, required: false },
                                 icon: { type: String, required: false },
-                            }
-                        ],
+                            },
                   },
                 ],
 
@@ -149,7 +145,7 @@ const userSchema = mongoose.Schema(
                   twitter: { type: String, required: false },
                   facebook: { type: String, required: false },
                   instagram: { type: String, required: false },
-            },
+            }
     },
 
       {
