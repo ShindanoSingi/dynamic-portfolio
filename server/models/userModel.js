@@ -1,5 +1,114 @@
 const mongoose = require("mongoose");
 
+// skillSchema
+const skillSchema = mongoose.Schema({
+      name: { type: String, required: false },
+      skill: {
+            name: { type: String, required: false },
+            level: { type: Number, required: false },
+            yearsOfExperience: { type: Number, required: false },
+            icon: { type: String, required: false },
+      },
+});
+
+// educationSchema
+const educationSchema = mongoose.Schema({
+      schoolLogo: { type: String, required: false },
+      schoolName: { type: String, required: false },
+      degree: { type: String, required: false },
+      fieldOfStudy: { type: String, required: false },
+      grade: { type: String, required: false },
+      startDate: { type: Date, required: false },
+      endDate: { type: Date, required: false },
+      description: { type: String, required: false },
+      graduated: { type: Boolean, required: false },
+});
+
+// experienceSchema
+const experienceSchema = mongoose.Schema({
+      companyLogo: { type: String, required: false },
+      companyName: { type: String, required: false },
+      jobTitle: { type: String, required: false },
+      startDate: { type: Date, required: false },
+      endDate: { type: Date, required: false },
+      description: [String],
+});
+
+// projectSchema
+const projectSchema = mongoose.Schema({
+      title: { type: String, required: false },
+      problemToSolve: { type: String, required: false },
+      description: { type: String, required: false },
+      skills: [{
+            type: mongoose.Schema.Types.ObjectId, ref: 'Skill'
+      }],
+      technologiesUsed: [String],
+      responsabilities: [String],
+      challenges: [String],
+      testimonials: [String],
+      teamMembers: [String],
+      awardsAndAchievements: [String],
+      projectStatus: { type: String, required: false },
+      clientContactInformation: {
+            name: { type: String, required: false },
+            email: { type: String, required: false },
+            phoneNumber: { type: String, required: false },
+      },
+      live: { type: String, required: false },
+      gitHub: { type: String, required: false },
+      screenshots: [String],
+      videoDemo: { type: String, required: false },
+      imageType: { type: String, required: false },
+      startDate: { type: Date, required: false },
+      endDate: { type: Date, required: false },
+      duration: { type: String, required: false },
+      demoLoginCredentials: {
+            type: String,
+            required: false,
+      },
+      fileAttachments: [String],
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const userSchema = mongoose.Schema(
       {
             firstName: { type: String, required: true },
@@ -12,7 +121,7 @@ const userSchema = mongoose.Schema(
 
             role: { type: String, default: 'user' },
             date: { type: Date, default: Date.now },
-            
+
             streetName: { type: String, required: false },
             streetNumber: { type: String, required: false },
             city: { type: String, required: false },
