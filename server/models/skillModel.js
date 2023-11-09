@@ -11,6 +11,10 @@ const skillSchema = mongoose.Schema({
                 required: false,
         },
         fileAttachments: [String],
+        user: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User'
+        }
     });
 
 module.exports = mongoose.model('Skill', skillSchema);
