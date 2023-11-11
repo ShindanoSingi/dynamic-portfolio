@@ -4,7 +4,7 @@ const Award = require("../models/awardModel");
 const router = require("express").Router();
 const authMiddleware = require("../middlewares/authMiddleware");
 const cloudinary = require("cloudinary");
-const { Router } = require("express");
+
 
 // Create a new award
 router.post("/create-award", authMiddleware, async (req, res) => {
