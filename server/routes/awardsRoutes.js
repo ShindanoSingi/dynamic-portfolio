@@ -11,7 +11,7 @@ router.post("/create-award", authMiddleware, async (req, res) => {
     try {
         const {name, description, image, userId} = req.body;
 
-        // Check if the user weith the provided userId exists
+        // Check if the user with the provided userId exists
         const userExists = await User.findById(userId);
 
         if (!userExists) {
@@ -62,6 +62,26 @@ router.post("/create-award", authMiddleware, async (req, res) => {
 // Get all awards
 router.get("/get-awards", authMiddleware, async (req, res) => {
     try {
+    // Check if the user with the given userId exist
+    const {userId} = req.body;
+
+    const user = await User.findById(userId);
+
+    if(!user){
+        return res.send({
+            message: "User does not exist",
+            success: false,
+        });
+    }
+
+    // Get all awards
+    const awards = await Award.find({user: userId});
+
+    return res.send({
+        message: "Awards fetched successfully",
+        success: true,
+        awards,
+    });
 
     } catch (error) {
         return res.send({
