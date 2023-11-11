@@ -91,6 +91,103 @@ router.get("/get-awards", authMiddleware, async (req, res) => {
     }
 });
 
+// Get an award
+router.get("/get-award/:id", authMiddleware, async (req, res) => {
+    try {
+        // Check if the user with the given userId exist
+        const {userId} = req.body;
+
+        const user = await User.findById(userId);
+
+        if(!user){
+            return res.send({
+                message: "User does not exist",
+                success: false,
+            });
+        }
+
+        // Get the award with the given id
+        const award = await Award.findById(req.params.id);
+
+        if(!award){
+            return res.send({
+                message: "Award does not exist",
+                success: false,
+            });
+        }
+
+        return res.send({
+            message: "Award fetched successfully",
+            success: true,
+            award,
+        });
+
+    } catch (error) {
+        return res.send({
+            message: error.message,
+            success: false,
+        });
+    }
+});
+
+// Update an award
+router.put("/update-award/:id", authMiddleware, async (req, res) => {
+    const { awardId } = req.params;
+    try {
+        const updatedAward = await Award.findByIdAndUpdate(awardId, req.body, { new: true });
+
+    if (!updatedAward) {
+      return res.send({
+        success: false,
+        message: 'Award not found',
+      });
+    }
+
+    return res.send({
+        success: true,
+        message: 'Award updated successfully',
+        updatedAward,
+    });
+
+    } catch (error) {
+        return res.send({
+            message: error.message,
+            success: false,
+        });
+    }
+});
+
+// Delete an award by ID
+router.delete('/delete-award/:awardId', async (req, res) => {
+    const { awardId } = req.params;
+
+    try {
+      const deletedAward = await Award.findByIdAndDelete(awardId);
+
+      if (!deletedAward) {
+        return res.send({
+            success: false,
+            message: 'Award not found',
+        });
+      }
+
+      // Remove the award ID from the associated user's awards array
+      const user = await User.findById(deletedAward.user);
+      if (user) {
+        user.awards = user.awards.filter((id) => id.toString() !== awardId);
+        await user.save();
+      }
+
+      return res.send({
+        success: true,
+        message: 'Award deleted successfully',
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Server Error', success: false });
+    }
+  });
+
 
 
 module.exports = router;
