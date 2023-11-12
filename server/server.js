@@ -9,6 +9,7 @@ const usersRoute = require('./routes/usersRoutes');
 const projectsRoute = require('./routes/projectsRoutes');
 const awardsRoute = require('./routes/awardsRoutes');
 const certificationsRoute = require('./routes/certificationsRoutes');
+const contactsRoute = require('./routes/contactsRoutes');
 
 app.use(express.json());
 
@@ -18,5 +19,6 @@ app.use('/api/users', usersRoute)
 app.use('/api/projects', projectsRoute)
 app.use('/api/awards', awardsRoute)
 app.use('/api/certifications', certificationsRoute)
+app.use('/api/contacts', contactsRoute)
 
 server.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
