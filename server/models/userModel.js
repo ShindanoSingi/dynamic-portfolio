@@ -35,15 +35,11 @@ const userSchema = mongoose.Schema({
     },
     stacks: { type: String, default: 'Full Stack' },
     about: { type: String, required: false },
-    skills:[
-        {
-        name: { type: String, required: false },
-        skill: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Skill'
-        }
-    }
-    ],
+    skills:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Skill'
+
+    }],
     education:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Education'

@@ -48,6 +48,7 @@ router.post("/create-award", authMiddleware, async (req, res) => {
         return res.send({
             message: "Award created successfully",
             success: true,
+            data: newAward,
         });
 
 
@@ -80,7 +81,7 @@ router.get("/get-awards", authMiddleware, async (req, res) => {
     return res.send({
         message: "Awards fetched successfully",
         success: true,
-        awards,
+        data:awards,
     });
 
     } catch (error) {
@@ -119,7 +120,7 @@ router.get("/get-award/:id", authMiddleware, async (req, res) => {
         return res.send({
             message: "Award fetched successfully",
             success: true,
-            award,
+            data:award,
         });
 
     } catch (error) {
@@ -146,7 +147,7 @@ router.put("/update-award/:id", authMiddleware, async (req, res) => {
     return res.send({
         success: true,
         message: 'Award updated successfully',
-        updatedAward,
+        data:updatedAward,
     });
 
     } catch (error) {
@@ -181,10 +182,13 @@ router.delete('/delete-award/:awardId', async (req, res) => {
       return res.send({
         success: true,
         message: 'Award deleted successfully',
+        data: deletedAward,
       });
     } catch (error) {
-      console.error(error);
-      return res.status(500).json({ message: 'Server Error', success: false });
+        return res.send({
+            success: false,
+            message: error.message,
+        });
     }
   });
 

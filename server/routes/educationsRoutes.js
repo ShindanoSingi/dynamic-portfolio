@@ -34,7 +34,7 @@ router.post("/create-education", authMiddleware, async (req, res) => {
             return res.send({
                   message: "Education created successfully",
                   success: true,
-                  education: newEducation
+                  data: newEducation
             })
         } catch (error) {
             return res.send({
@@ -48,13 +48,11 @@ router.post("/create-education", authMiddleware, async (req, res) => {
 router.get("/get-educations", authMiddleware, async (req, res) => {
       try {
             const educations = await Education.find({user: req.body.userId});
-            console.log(educations);
-
 
             return res.send({
                   message: "Educations fetched successfully",
                   success: true,
-                  educations
+                  data: educations
             });
       } catch (error) {
             return res.send({
@@ -73,7 +71,7 @@ router.get("/get-education/:id", authMiddleware, async (req, res) => {
             return res.send({
                   message: "Education fetched successfully",
                   success: true,
-                  education
+                  data: education
             });
       } catch (error) {
             return res.send({
@@ -100,7 +98,7 @@ router.put("/update-education/:id", authMiddleware, async (req, res) => {
                 return res.send({
                     message: "Education fetched successfully",
                     success: true,
-                    education: updatedEducation
+                    data: updatedEducation
                 });
         } catch (error) {
                 return res.send({
@@ -133,6 +131,7 @@ router.delete("/delete-education/:id", authMiddleware, async (req, res) => {
                 return res.send({
                     message: "Education deleted successfully",
                     success: true,
+                        data: deletedEducation
                 });
         } catch (error) {
                 return res.send({

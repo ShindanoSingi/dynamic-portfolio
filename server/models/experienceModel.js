@@ -6,7 +6,7 @@ const experienceSchema = mongoose.Schema({
     jobTitle: { type: String, required: false },
     startDate: { type: Date, required: false },
     endDate: { type: Date, required: false },
-    description: [String],
+    description: { type: String, required: false },
     user:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'

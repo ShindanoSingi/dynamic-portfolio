@@ -30,6 +30,7 @@ router.post("/create-project", authMiddleware, async (req, res) => {
         return res.send({
             message: "Project created successfully",
             success: true,
+            data: newProject
         });
 
     } catch (error) {
@@ -47,7 +48,7 @@ router.get("/get-projects", authMiddleware, async (req, res) => {
         return res.send({
             message: "Projects retrieved successfully",
             success: true,
-            projects,
+            data:projects,
         });
     } catch (error) {
         return res.send({
@@ -72,7 +73,7 @@ router.get("/get-project/:id", authMiddleware, async (req, res) => {
         return res.send({
             message: "Project retrieved successfully",
             success: true,
-            project,
+            data:project,
         });
     } catch (error) {
         return res.send({
@@ -99,6 +100,7 @@ router.put("/update-project/:id", authMiddleware, async (req, res) => {
         return res.send({
             message: "Project updated successfully",
             success: true,
+            data: project,
         });
     } catch (error) {
         return res.send({
@@ -125,6 +127,7 @@ router.delete("/delete-project/:id", authMiddleware, async (req, res) => {
         return res.send({
             message: "Project deleted successfully",
             success: true,
+            data: project,
         });
     } catch (error) {
         return res.send({

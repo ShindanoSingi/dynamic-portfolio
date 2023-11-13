@@ -35,7 +35,8 @@ router.post("/create-certificate", authMiddleware, async (req, res) => {
 
             return res.send({
                   message: "Certification created successfully",
-                  success: true
+                  success: true,
+                  data: newCertification
             });
       } catch (error) {
             return res.send({
@@ -67,7 +68,7 @@ router.get("/get-certificates", authMiddleware, async (req, res) => {
             return res.send({
                   message: "Certifications retrieved successfully",
                   success: true,
-                  certifications
+                  data:certifications
             });
       } catch (error) {
             return res.send({
@@ -97,7 +98,7 @@ router.get("/get-certificate/:id", authMiddleware, async (req, res) => {
             return res.send({
                   message: "Certification retrieved successfully",
                   success: true,
-                  certification: certificationExists
+                  data: certificationExists
             });
       } catch (error) {
             return res.send({
@@ -130,7 +131,8 @@ router.put("/update-certificate/:id", authMiddleware, async (req, res) => {
 
             return res.send({
                   message: "Certification updated successfully",
-                  success: true
+                  success: true,
+                  data: updatedCertification
             });
       } catch (error) {
             return res.send({
@@ -169,7 +171,8 @@ router.delete("/delete-certificate/:id", authMiddleware, async (req, res) => {
 
             return res.send({
                   message: "Certification deleted successfully",
-                  success: true
+                  success: true,
+                  data: deletedCertificate
             });
       } catch (error) {
             return res.send({

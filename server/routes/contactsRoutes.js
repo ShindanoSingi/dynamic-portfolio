@@ -43,7 +43,7 @@ router.post("/create-contact", authMiddleware, async (req, res) => {
             return res.send({
                     message: "Contact created successfully",
                     success: true,
-                    contact: newContact
+                    data: newContact
             });
 
 
@@ -65,7 +65,7 @@ router.get("/get-contact", authMiddleware, async (req, res) => {
             return res.send({
                   message: "Contact fetched successfully",
                   success: true,
-                  contact: user.contact
+                  data: user.contact
             });
       } catch (error) {
             return res.send({
@@ -89,7 +89,8 @@ router.get("/get-contact/:id", authMiddleware, async (req, res) => {
 
             return res.send({
                   contact,
-                  success: true
+                  success: true,
+                  data: contact
             });
       } catch (error) {
             return res.send({
@@ -123,7 +124,7 @@ router.put("/update-contact/:id", authMiddleware, async (req, res) => {
             return res.send({
                   message: "Contact updated successfully",
                   success: true,
-                    contact: updatedContact
+                  data: updatedContact
             });
       } catch (error) {
             return res.send({
@@ -152,7 +153,7 @@ router.delete("/delete-contact/:id", authMiddleware, async (req, res) => {
             return res.send({
                   message: "Contact deleted successfully",
                   success: true,
-                  deletedContact
+                  data: deletedContact
             });
       } catch (error) {
             return res.send({
