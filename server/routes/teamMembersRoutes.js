@@ -15,12 +15,12 @@ router.post("/create-teamMember", authMiddleware, async (req, res) => {
             const user = await User.findById(userId);
 
 
-            if (!user) {
-                  return res.send({
-                        status: "error",
-                        message: "User does not exist"
-                  });
-            }
+            // if (!user) {
+            //       return res.send({
+            //             status: "error",
+            //             message: "User does not exist"
+            //       });
+            // }
 
             const member = await teamMember.create(req.body);
             member.user = userId;
