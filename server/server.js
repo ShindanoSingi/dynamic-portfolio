@@ -14,6 +14,7 @@ const educationsRoute = require('./routes/educationsRoutes');
 const experiencesRoute = require('./routes/experiencesRoutes');
 const skillsRoute = require('./routes/skillsRoutes');
 const teamMembersRoute = require('./routes/teamMembersRoutes');
+const testimonialsRoute = require('./routes/testimonialsRoutes');
 
 app.use(express.json());
 
@@ -28,5 +29,6 @@ app.use('/api/educations', educationsRoute)
 app.use('/api/experiences', experiencesRoute)
 app.use('/api/skills', skillsRoute)
 app.use('/api/team-members', teamMembersRoute)
+app.use('/api/testimonials', testimonialsRoute)
 
 server.listen(PORT, () => console.log(`Server listening on port ${PORT}`));

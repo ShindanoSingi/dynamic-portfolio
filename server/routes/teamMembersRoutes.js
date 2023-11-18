@@ -137,6 +137,13 @@ router.delete('/team-members/:teamMemberId', authMiddleware, async (req, res) =>
             })
         }
 
+        // Delete team member from project team members array
+        const project = await Project.findOneAndUpdate(
+            { teamMembers: teamMemberId },
+            { $pull: { teamMembers: teamMemberId } },
+            { new: true }
+        );
+
         res.send({
             message: "Team member deleted successfully",
             success: true,
