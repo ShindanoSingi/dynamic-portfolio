@@ -9,7 +9,7 @@ const teamMemberSchema = mongoose.Schema({
         bio: { type: String, required: false },
         photo: { type: String, required: false },
         socialMediaLinks: { type: String, required: false },
-        fileAttachments: [String],
+        fileAttachments: { type: String, required: false },
         user: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'User'
