@@ -5,12 +5,26 @@ const router = require("express").Router();
 const authMiddleware = require("../middlewares/authMiddleware");
 const cloudinary = require("cloudinary");
 const multer = require("multer");
+const { uploader } = require("../cloudinary");
+
+// Configure multer
+const storage = multer.diskStorage({
+    destination: (req, res, cb) => {
+        cb(null, "./images");
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + "--" + file.originalname);
+    }
+});
+
+const uploadedImage = multer({storage: storage})
 
 
 // Create a new award
-router.post("/create-award", authMiddleware, async (req, res) => {
+router.post("/create-award", uploadedImage.single('image'), authMiddleware, async (req, res) => {
+
     try {
-        const {name, description, image, userId} = req.body;
+        const {name, description, userId} = req.body;
 
         // Check if the user with the provided userId exists
         const userExists = await User.findById(userId);
@@ -22,16 +36,11 @@ router.post("/create-award", authMiddleware, async (req, res) => {
             });
         }
 
-        // Upload the image to cloudinary
-        const uploadedImage = await cloudinary.uploader.upload(image, {
-            folder: "assets",
-        });
-
         // Create a new award
         const newAward = new Award({
             name,
             description,
-            image: uploadedImage.secure_url,
+            image: req.file.path,
             user: userId,
         });
 
@@ -56,32 +65,6 @@ router.post("/create-award", authMiddleware, async (req, res) => {
         });
     }
 });
-
-
-
-
-// Upload Award image
-// router.post("/create-award-image", authMiddleware, async (req, res) => {
-
-//     try {
-//         const image = req.body.image;
-
-//         // Upload image to cloudinary
-//         const uploadedImage = await cloudinary.uploader.upload(image, {
-//             folder: "assets",
-//         });
-
-//         // Add the image to the award
-//         const award = await Award.findById(req.params.id);
-
-
-//     } catch (error) {
-//         return res.send({
-//             message: error.message,
-//             success: false,
-//         });
-//     }
-// });
 
 // Get all awards
 router.get("/get-awards", authMiddleware, async (req, res) => {
@@ -133,6 +116,8 @@ router.get("/get-award/:id", authMiddleware, async (req, res) => {
         // Get the award with the given id
         const award = await Award.findById(req.params.id);
 
+
+
         if(!award){
             return res.send({
                 message: "Award does not exist",
@@ -155,10 +140,23 @@ router.get("/get-award/:id", authMiddleware, async (req, res) => {
 });
 
 // Update an award
-router.put("/update-award/:id", authMiddleware, async (req, res) => {
-    const { awardId } = req.params;
+router.put("/update-award/:id", uploadedImage.single('image'), authMiddleware, async (req, res) => {
+    const awardId = req.params.id;
+    const {name, description, userId} = req.body;
+    const uploadedImage = req.file.path;
+
+    console.log(uploadedImage);
+
     try {
-        const updatedAward = await Award.findByIdAndUpdate(awardId, req.body, { new: true });
+        const updatedAward = await Award.findByIdAndUpdate(awardId, {
+            name,
+            description,
+            image: uploadedImage,
+            user: userId,
+        }, { new: true
+        });
+
+        await updatedAward.save();
 
     if (!updatedAward) {
       return res.send({
