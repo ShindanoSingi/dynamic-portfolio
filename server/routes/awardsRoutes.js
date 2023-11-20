@@ -4,6 +4,7 @@ const Award = require("../models/awardModel");
 const router = require("express").Router();
 const authMiddleware = require("../middlewares/authMiddleware");
 const cloudinary = require("cloudinary");
+const multer = require("multer");
 
 
 // Create a new award
@@ -21,20 +22,16 @@ router.post("/create-award", authMiddleware, async (req, res) => {
             });
         }
 
-        // Upload image to cloudinary
-
-        // const uploadedImage = await cloudinary.v2.uploader.upload(image, {
-        //     folder: "awards",
-        //     width: 150,
-        //     crop: "scale",
-        // });
+        // Upload the image to cloudinary
+        const uploadedImage = await cloudinary.uploader.upload(image, {
+            folder: "assets",
+        });
 
         // Create a new award
-        const newAward = await Award({
+        const newAward = new Award({
             name,
             description,
-            // image: uploadedImage.secure_url,
-            // cloudinaryId: uploadedImage.public_id,
+            image: uploadedImage.secure_url,
             user: userId,
         });
 
@@ -59,6 +56,32 @@ router.post("/create-award", authMiddleware, async (req, res) => {
         });
     }
 });
+
+
+
+
+// Upload Award image
+// router.post("/create-award-image", authMiddleware, async (req, res) => {
+
+//     try {
+//         const image = req.body.image;
+
+//         // Upload image to cloudinary
+//         const uploadedImage = await cloudinary.uploader.upload(image, {
+//             folder: "assets",
+//         });
+
+//         // Add the image to the award
+//         const award = await Award.findById(req.params.id);
+
+
+//     } catch (error) {
+//         return res.send({
+//             message: error.message,
+//             success: false,
+//         });
+//     }
+// });
 
 // Get all awards
 router.get("/get-awards", authMiddleware, async (req, res) => {
