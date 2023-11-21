@@ -1,11 +1,10 @@
 const User = require("../models/userModel");
 const Award = require("../models/awardModel");
-
 const router = require("express").Router();
 const authMiddleware = require("../middlewares/authMiddleware");
-const cloudinary = require("cloudinary");
+
 const multer = require("multer");
-const { uploader } = require("../cloudinary");
+
 
 // Configure multer
 const storage = multer.diskStorage({
@@ -17,7 +16,7 @@ const storage = multer.diskStorage({
     }
 });
 
-const uploadedImage = multer({storage: storage})
+// const uploadedImage = multer({storage: storage})
 
 
 // Create a new award

@@ -1,15 +1,28 @@
 const User = require("../models/userModel");
 const Education = require("../models/educationModel");
-
 const router = require("express").Router();
 const authMiddleware = require("../middlewares/authMiddleware");
-const cloudinary = require("cloudinary");
+
+const multer = require("multer");
+
+
+// Configure multer
+const storage = multer.diskStorage({
+    destination: (req, res, cb) => {
+        cb(null, "./images");
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + "--" + file.originalname);
+    }
+});
+
+const uploadedImage = multer({storage: storage})
 
 // Create a new education
-router.post("/create-education", authMiddleware, async (req, res) => {
+router.post("/create-education", authMiddleware, uploadedImage.single('image'), async (req, res) => {
       try {
-            // Get user's Id
-            const { userId } = req.body;
+            const {userId} = req.body;
+            // console.log(req.file.path);
 
             // Check if user already exists
             const userExists = await User.findById(userId);
@@ -22,19 +35,23 @@ router.post("/create-education", authMiddleware, async (req, res) => {
             }
 
             // Create new education
-            const newEducation = new Education(req.body);
-            newEducation.user = userId;
-            await newEducation.save();
+            // const newEducation = new Education({
+            //       ...req.body,
+            //       schoolLogo: req.file.path
+
+            // });
+            // newEducation.user = userId;
+            // await newEducation.save();
 
             // Update user's education
-            userExists.education.push(newEducation.id);
+            // userExists.education.push(newEducation.id);
 
-            await userExists.save();
+            // await userExists.save();
 
             return res.send({
                   message: "Education created successfully",
                   success: true,
-                  data: newEducation
+                  // data: newEducation
             })
         } catch (error) {
             return res.send({
