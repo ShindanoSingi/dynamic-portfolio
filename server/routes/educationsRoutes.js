@@ -19,25 +19,8 @@ const storage = multer.diskStorage({
 const uploadedImage = multer({storage: storage})
 
 // Create a new education
-router.post("/create-education", authMiddleware, uploadedImage.single('image'), async (req, res) => {
-      try {
-            const {userId} = req.body;
-            // console.log(req.file.path);
-
-            // Check if user already exists
-            const userExists = await User.findById(userId);
-
-            if (!userExists) {
-                  return res.send({
-                        message: "User not found",
-                        success: false
-                  });
-            }
-
-            // Create new education
-            // const newEducation = new Education({
-            //       ...req.body,
-            //       schoolLogo: req.file.path
+router.post("/create-education", uploadedImage.single('image'), authMiddleware, async (req, res) => {
+      console.log("Hello world");
 
             // });
             // newEducation.user = userId;
