@@ -7,16 +7,16 @@ const multer = require("multer");
 
 
 // Configure multer
-// const storage = multer.diskStorage({
-//     destination: (req, res, cb) => {
-//         cb(null, "./images");
-//     },
-//     filename: (req, file, cb) => {
-//         cb(null, Date.now() + "--" + file.originalname);
-//     }
-// });
+const storage = multer.diskStorage({
+    destination: (req, res, cb) => {
+        cb(null, "./images");
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + "--" + file.originalname);
+    }
+});
 
-// const uploadedImage = multer({storage: storage})
+const uploadedImage = multer({storage: storage})
 
 
 // Create a new award
@@ -142,20 +142,29 @@ router.get("/get-award/:id", authMiddleware, async (req, res) => {
 router.put("/update-award/:id", uploadedImage.single('image'), authMiddleware, async (req, res) => {
     const awardId = req.params.id;
     const {name, description, userId} = req.body;
-    const uploadedImage = req.file.path;
+    console.log(req.file);
+    const image = req.file.path;
 
-    console.log(uploadedImage);
 
     try {
+        // Check if the file was successfully uploaded
+        if (!req.file || !req.file.path) {
+            return res.send({
+                message: 'File upload failed',
+                success: false,
+            });
+        }
+
         const updatedAward = await Award.findByIdAndUpdate(awardId, {
             name,
             description,
-            image: uploadedImage,
+            image,
             user: userId,
-        }, { new: true
+        }, {
+            new: true
         });
 
-        await updatedAward.save();
+        updatedAward.save();
 
     if (!updatedAward) {
       return res.send({

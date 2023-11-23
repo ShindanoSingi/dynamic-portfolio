@@ -20,21 +20,45 @@ const uploadedImage = multer({storage: storage})
 
 // Create a new education
 router.post("/create-education", uploadedImage.single('image'), authMiddleware, async (req, res) => {
-      console.log("Hello world");
+      try {
+            const {userId} = req.body;
 
-            // });
-            // newEducation.user = userId;
-            // await newEducation.save();
+            // Check if user already exists
+            const userExists = await User.findById(userId).populate('education');
+
+            if (!userExists) {
+                  return res.send({
+                        message: "User not found",
+                        success: false
+                  });
+            }
+
+            // Create new education
+            const newEducation = new Education({
+                  schoolLogo: req.file.path,
+                  schoolName: req.body.schoolName,
+                  degree: req.body.degree,
+                  fieldOfStudy: req.body.fieldOfStudy,
+                  grade: req.body.grade,
+                  startDate: req.body.startDate,
+                  endDate: req.body.endDate,
+                  description: req.body.description,
+                  graduated: req.body.graduated,
+                  user: userId
+            });
+
+            newEducation.user = userId;
+            await newEducation.save();
 
             // Update user's education
-            // userExists.education.push(newEducation.id);
+            userExists.education.push(newEducation.id);
 
-            // await userExists.save();
+            await userExists.save();
 
             return res.send({
                   message: "Education created successfully",
                   success: true,
-                  // data: newEducation
+                  data: newEducation
             })
         } catch (error) {
             return res.send({
@@ -66,7 +90,7 @@ router.get("/get-educations", authMiddleware, async (req, res) => {
 router.get("/get-education/:id", authMiddleware, async (req, res) => {
 
       try {
-            const education = await Education.findById(req.params.id);
+            const education = await Education.findById(req.params.id).populate('_id');
 
             return res.send({
                   message: "Education fetched successfully",
@@ -82,11 +106,14 @@ router.get("/get-education/:id", authMiddleware, async (req, res) => {
 });
 
 // Update a single education
-router.put("/update-education/:id", authMiddleware, async (req, res) => {
+router.put("/update-education/:id", uploadedImage.single('image'), authMiddleware, async (req, res) => {
 
         try {
-                const updatedEducation = await Education.findByIdAndUpdate(req.params.id, req.body, {new: true});
-                updatedEducation.save();
+                const updatedEducation = await Education.findByIdAndUpdate(req.params.id,
+                  req.body,
+                  req.file.path ? {image: req.file.path} : '',
+                    {new: true});
+       updatedEducation.save();
 
                 if (!updatedEducation){
                         return res.send({

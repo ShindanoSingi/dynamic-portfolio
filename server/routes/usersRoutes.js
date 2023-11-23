@@ -93,7 +93,7 @@ router.get("/get-current-user", authMiddleware, async (req, res) => {
 });
 
 // Get all users
-router.get("/get-all-users", async (req, res) => {
+router.get("/get-all-users", authMiddleware, async (req, res) => {
     try {
         const users = await User.find();
         return res.send({

@@ -3,10 +3,24 @@ const Experience= require("../models/experienceModel");
 
 const router = require("express").Router();
 const authMiddleware = require("../middlewares/authMiddleware");
-const cloudinary = require("cloudinary");
+
+const multer = require("multer");
+
+
+// Configure multer
+const storage = multer.diskStorage({
+    destination: (req, res, cb) => {
+        cb(null, "./images");
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + "--" + file.originalname);
+    }
+});
+
+const uploadedImage = multer({storage: storage})
 
 // Create a new experience
-router.post("/create-experience", authMiddleware, async (req, res) => {
+router.post("/create-experience", uploadedImage.single('image'), authMiddleware, async (req, res) => {
       try {
             // Get user's Id
             const { userId } = req.body;
@@ -22,7 +36,10 @@ router.post("/create-experience", authMiddleware, async (req, res) => {
             }
 
             // Create new experience
-            const newExperience = new Experience(req.body);
+            const newExperience = new Experience({
+                  ...req.body,
+                  image: req.file.path
+            });
             newExperience.user = userId;
             await newExperience.save();
 
@@ -106,7 +123,7 @@ router.get("/get-experience/:id", authMiddleware, async (req, res) => {
 });
 
 // Update an experience
-router.put("/update-experience/:id", authMiddleware, async (req, res) => {
+router.put("/update-experience/:id", uploadedImage.single('image'), authMiddleware, async (req, res) => {
       try {
             const { userId } = req.body;
 
@@ -120,7 +137,12 @@ router.put("/update-experience/:id", authMiddleware, async (req, res) => {
                   });
             }
 
-            const experience = await Experience.findByIdAndUpdate(req.params.id, req.body, { new: true });
+            const experience = await Experience.findByIdAndUpdate(req.params.id,
+                  {
+                        ...req.body,
+                        image: req.file.path
+                  }
+                  , { new: true });
 
             return res.send({
                   message: "Experience updated successfully",

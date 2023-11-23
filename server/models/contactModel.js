@@ -15,7 +15,7 @@ const contactSchema = mongoose.Schema(
 
             resumeName: { type: String, required: false },
             resumeType: { type: String, required: false },
-            resumeUrl: { type: String, required: false },
+            image: { type: String, required: false },
 
             gitHub: { type: String, required: false },
             linkedIn: { type: String, required: false },
