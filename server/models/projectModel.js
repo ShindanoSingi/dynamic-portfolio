@@ -5,9 +5,7 @@ const projectSchema = mongoose.Schema({
       title: { type: String, required: false },
       problemToSolve: { type: String, required: false },
       description: { type: String, required: false },
-      skills: [{
-            type: mongoose.Schema.Types.ObjectId, ref: 'Skill'
-      }],
+      skills: [String],
       technologiesUsed: [String],
       responsabilities: [String],
       challenges: [String],
@@ -29,8 +27,8 @@ const projectSchema = mongoose.Schema({
       live: { type: String, required: false },
       gitHub: { type: String, required: false },
       screenshots: [String],
-      videoDemo: { type: String, required: false },
-      imageType: { type: String, required: false },
+      video: { type: String, required: false },
+      image: { type: String, required: false },
       startDate: { type: Date, required: false },
       endDate: { type: Date, required: false },
       duration: { type: String, required: false },

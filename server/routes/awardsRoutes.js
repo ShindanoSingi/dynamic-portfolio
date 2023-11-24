@@ -1,5 +1,6 @@
 const User = require("../models/userModel");
 const Award = require("../models/awardModel");
+const Project = require("../models/projectModel");
 const router = require("express").Router();
 const authMiddleware = require("../middlewares/authMiddleware");
 

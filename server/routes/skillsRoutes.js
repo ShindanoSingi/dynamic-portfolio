@@ -1,12 +1,27 @@
 const User = require("../models/userModel");
+const Project = require("../models/projectModel");
 const Skill = require("../models/skillModel");
 
 const router = require("express").Router();
 const authMiddleware = require("../middlewares/authMiddleware");
-const cloudinary = require("cloudinary");
+
+const multer = require("multer");
+
+
+// Configure multer
+const storage = multer.diskStorage({
+    destination: (req, res, cb) => {
+        cb(null, "./images");
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + "--" + file.originalname);
+    }
+});
+
+const uploadedImage = multer({storage: storage})
 
 // Create a skill
-router.post("/create-skill", authMiddleware, async (req, res) => {
+router.post("/create-skill", uploadedImage.single('image'), authMiddleware, async (req, res) => {
       try {
             const { userId } = req.body;
 
@@ -20,7 +35,10 @@ router.post("/create-skill", authMiddleware, async (req, res) => {
                   });
             }
 
-            const skill = await Skill.create(req.body);
+            const skill = await Skill.create({
+                  ...req.body,
+                  image: req.file.path
+            });
             skill.user = userId;
             await skill.save();
 
@@ -109,7 +127,7 @@ router.get("/get-skill/:id", authMiddleware, async (req, res) => {
 });
 
 // Update a skill
-router.put("/update-skill/:id", authMiddleware, async (req, res) => {
+router.put("/update-skill/:id", uploadedImage.single('image'), authMiddleware, async (req, res) => {
       const { userId } = req.body;
       try {
             const user = await User.findById(userId);
@@ -132,7 +150,10 @@ router.put("/update-skill/:id", authMiddleware, async (req, res) => {
 
             const updatedSkill = await Skill.findByIdAndUpdate(
                   req.params.id,
-                  req.body,
+                  {
+                        ...req.body,
+                        image: req.file.path
+                  },
                   { new: true }
             );
 
@@ -192,5 +213,6 @@ router.delete("/delete-skill/:id", authMiddleware, async (req, res) => {
             });
       }
 });
+
 
 module.exports = router;

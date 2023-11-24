@@ -4,10 +4,24 @@ const TeamMember = require("../models/teamMemberModel");
 
 const router = require("express").Router();
 const authMiddleware = require("../middlewares/authMiddleware");
-const cloudinary = require("cloudinary");
+
+const multer = require("multer");
+
+
+// Configure multer
+const storage = multer.diskStorage({
+    destination: (req, res, cb) => {
+        cb(null, "./images");
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + "--" + file.originalname);
+    }
+});
+
+const uploadedImage = multer({storage: storage})
 
 // Create a new Team member
-router.post('/projects/:projectId/add-team-member', authMiddleware, async (req, res) => {
+router.post('/projects/:projectId/add-team-member', uploadedImage.single('image'), authMiddleware, async (req, res) => {
     try {
         const { projectId } = req.params;
         const { userId } = req.body;
@@ -22,7 +36,12 @@ router.post('/projects/:projectId/add-team-member', authMiddleware, async (req, 
             })
         }
 
-        const teamMember = await TeamMember.create(req.body);
+        const teamMember = await TeamMember.create({
+            ...req.body,
+            image: req.file.path,
+            user: userId,
+
+        });
 
         const updatedProject = await Project.findByIdAndUpdate(
             projectId,
