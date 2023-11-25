@@ -1,0 +1,86 @@
+.button{
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+    border: 2px solid;
+    color: #fff;
+}
+
+.button:hover{
+    opacity: 0.8;
+}
+
+.primary{
+    background-color: #1e90ff;
+    border-color: #1e90ff;
+}
+
+.secondary{
+    background-color: #676161;
+    border-color: #676161;
+}
+
+.success{
+    background-color: #105c10;
+    border-color: #105c10;
+}
+
+.danger{
+    background-color: #ff0000;
+    border-color: #ff0000;
+}
+
+.warning{
+    background-color: #ff8c00;
+    border-color: #ff8c00;
+}
+
+.info{
+    background-color: #1e90ff;
+    border-color: #1e90ff;
+}
+
+.light{
+    background-color: #f8f9fa;
+    color: #000;
+    border-color: #f8f9fa;
+}
+
+.dark{
+    background-color: #343a40;
+}
+
+.disabled{
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.none{
+    background-color: transparent;
+    color: #676161;
+    border: 2px solid #676161;
+
+}
+
+.small{
+    padding: 5px 10px;
+    font-size: 0.8rem;
+}
+
+.medium{
+    padding: 10px 20px;
+    font-size: 1rem;
+}
+
+.large{
+    padding: 15px 30px;
+    font-size: 1.2rem;
+}
+
+.button{
+    width: var(--custom-width, auto);
+}

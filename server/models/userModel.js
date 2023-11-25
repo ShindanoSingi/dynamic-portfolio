@@ -21,20 +21,15 @@ const userSchema = mongoose.Schema({
     twitter: { type: String, required: false },
     facebook: { type: String, required: false },
     instagram: { type: String, required: false },
-    profilePicture: { type: String, required: false },
-    profilePictureName:{
-        type: String,
-        required: false
-    },
-    resetPasswordToken: { type: String, required: false },
-    resetPasswordExpires: { type: Date, required: false },
+    image: { type: String, required: false },
     title: { type: String, required: false },
     description:{
         type: String,
         required: false
     },
-    stacks: { type: String, default: 'Full Stack' },
+    stacks: [{ type: String, default: 'Full Stack' }],
     about: { type: String, required: false },
+    profilePicture: { type: String, required: false },
     skills:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Skill'
@@ -81,7 +76,6 @@ const userSchema = mongoose.Schema({
         ref: 'SocialMedia'
     }
     ],
-      profilePicture: { type: String, required: false }
 },{
     timestamps: true
 });

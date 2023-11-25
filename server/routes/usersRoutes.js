@@ -4,7 +4,21 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const router = require("express").Router();
 const authMiddleware = require("../middlewares/authMiddleware");
-const cloudinary = require("cloudinary");
+
+const multer = require("multer");
+
+
+// Configure multer
+const storage = multer.diskStorage({
+    destination: (req, res, cb) => {
+        cb(null, "./images");
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + "--" + file.originalname);
+    }
+});
+
+const uploadedImage = multer({storage: storage})
 
 // User registration
 router.post("/register", async (req, res) => {
@@ -174,5 +188,118 @@ router.delete("/delete-user", authMiddleware, async (req, res) => {
         });
     }
 })
+
+// Upload profile picture
+router.put('/profile-picture', uploadedImage.single('image'), authMiddleware, async (req, res) => {
+    const userId = req.body.userId;
+    const image = req.file.path;
+
+    try {
+        // Check if the file was successfully uploaded
+        if (!req.file || !req.file.path) {
+            return res.send({
+                message: 'File upload failed',
+                success: false,
+            });
+        }
+
+        const updatedUser = await User.findByIdAndUpdate(userId, {
+            profilePicture: image,
+        }, {
+            new: true
+        });
+
+        updatedUser.save();
+
+    if (!updatedUser) {
+      return res.send({
+        success: false,
+        message: 'User not found',
+      });
+    }
+
+    return res.send({
+        success: true,
+        message: 'Profile picture updated successfully',
+        data:updatedUser,
+    });
+
+    } catch (error) {
+        return res.send({
+            message: error.message,
+            success: false,
+        });
+    }
+});
+
+// Add stack
+router.post('/add-stack', authMiddleware, async (req, res) => {
+    const userId = req.body.userId;
+    const stack = req.body.stack;
+
+    try {
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.send({
+                success: false,
+                message: 'User not found',
+            });
+        }
+
+        user.stacks.push(stack);
+        await user.save();
+
+        return res.send({
+            success: true,
+            message: 'Stack added successfully',
+            data: user,
+        });
+
+    } catch (error) {
+        return res.send({
+            message: error.message,
+            success: false,
+        });
+    }
+});
+
+// Update stack
+router.put('/update-stack', authMiddleware, async (req, res) => {
+    const userId = req.body.userId;
+    const stack = req.body.stack;
+
+    try {
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.send({
+                success: false,
+                message: 'User not found',
+            });
+        }
+
+        user.stacks = user.stacks.map((s) => {
+            if (s._id.toString() === stack._id.toString()) {
+                return stack;
+            }
+            return s;
+        });
+
+        await user.save();
+
+        return res.send({
+            success: true,
+            message: 'Stack updated successfully',
+            data: user,
+        });
+
+    } catch (error) {
+        return res.send({
+            message: error.message,
+            success: false,
+        });
+    }
+});
 
 module.exports = router;

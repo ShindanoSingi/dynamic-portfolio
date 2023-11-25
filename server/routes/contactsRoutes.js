@@ -26,7 +26,7 @@ router.post("/create-contact", uploadedImage.single('image'), authMiddleware, as
             const { userId } = req.body;
 
             // Check if user already exists
-            const userExists = await User.findById(userId);
+            const userExists = await User.findById(userId).populate("contact");
 
             if (!userExists) {
                     return res.send({
