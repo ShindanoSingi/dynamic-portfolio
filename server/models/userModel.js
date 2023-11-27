@@ -11,8 +11,8 @@ const userSchema = mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    streetName: { type: String, required: false },
     streetNumber: { type: String, required: false },
+    streetName: { type: String, required: false },
     city: { type: String, required: false },
     state: { type: String, required: false },
     postalCode: { type: String, required: false },
