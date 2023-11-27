@@ -67,6 +67,12 @@ button:hover {
   background: linear-gradient(to right, #00608e, #3498db);
 }
 
+.input-icon {
+  background: linear-gradient(to right, #00608e, #3498db);
+  height: 3.38rem;
+  width: 3rem;
+}
+
 .signup-left{
   width: 50%;
   height: 100%;
@@ -75,6 +81,10 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: url("../../assets/My image.jpeg");
+  background-repeat: no-repeat;
+  background-size: 40rem;
+  background-position: center;
 }
 
 .signup-right{
@@ -83,4 +93,5 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #F3F5F7;
 }

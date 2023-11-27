@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import './RegisterPage.css';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const RegisterPage = () => {
   const containerVariants = {
@@ -21,7 +22,7 @@ const RegisterPage = () => {
       initial="hidden"
       animate="visible"
     >
-      <div className="signup-left">
+      <div className="signup-left sm:none">
         <h1>Sign Up</h1>
       </div>
       <div className="signup-right">
@@ -34,22 +35,18 @@ const RegisterPage = () => {
         <h2>Registration</h2> <hr />
         <form>
           <div className="name-input">
-            <div>
-              <label htmlFor="firstName">First Name</label>
+            <div className='flex items-center border border-blue-500'>
+              <div className="flex items-center justify-center input-icon">
+              <AccountCircleIcon className='text-[#182848]' />
+              </div>
               <input type="text" id="firstName" placeholder="Enter your first name" />
             </div>
             <div>
-              <label htmlFor="lastName">Last Name</label>
               <input type="text" id="lastName" placeholder="Enter your last name" />
             </div>
           </div>
-          <label htmlFor="username">Username</label>
           <input type="text" id="username" placeholder="Enter your username" />
-
-          <label htmlFor="email">Email</label>
           <input type="email" id="email" placeholder="Enter your email" />
-
-          <label htmlFor="password">Password</label>
           <input type="password" id="password" placeholder="Enter your password" />
 
           <button type="submit">Sign Up</button>
