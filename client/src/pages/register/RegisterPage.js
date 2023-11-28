@@ -33,24 +33,25 @@ const RegisterPage = () => {
       >
         <h2>Registration</h2> <hr required />
         <form>
-          <input type="text" id="firstName" placeholder="Enter your first name" required />
-          <input type="text" id="lastName" placeholder="Enter your last name" required />
-          <input type="text" id="username" placeholder="Enter your username" required />
-          <input type="email" id="email" placeholder="Enter your email" required />
-          <input type="password" id="password" placeholder="Enter your password" required />
+          <input type="text" name='firstName' id="firstName" placeholder="Enter your first name" required />
+          <input type="text" name='lastName' id="lastName" placeholder="Enter your last name" required />
+          <input type="text" name='username' id="username" placeholder="Enter your username" required />
+          <input type="email" name='email' id="email" placeholder="Enter your email" required />
+          <input type="password" name='password' id="password" placeholder="Enter your password" required />
 
-          <input type="text" id="streetnumber" placeholder="Enter your street number" required />
-          <input type="text" id="streetname" placeholder="Enter your street name" required />
-          <input type="text" id="cityname" placeholder="Enter your city name" required />
-          <input type="text" id="statename" placeholder="Enter your state name" required />
+          <input type="text" name='streetnumber' id="streetnumber" placeholder="Enter your street number" required />
+          <input type="text" name='streetname' id="streetname" placeholder="Enter your street name" required />
+          <input type="text" name='cityname' id="cityname" placeholder="Enter your city name" required />
+          <input type="text" name='statename' id="statename" placeholder="Enter your state name" required />
 
-          <input type="text" id="postalcode" placeholder="Enter the postal code" required />
-          <input type="text" id="github" placeholder="Github address (optional)" />
-          <input type="text" id="linkedin" placeholder="Linkedin address (optional)" />
-          <input type="text" id="facebook" placeholder="Facebook address (optional)" />
-          <input type="text" id="twitter" placeholder="Twitter address (optional)" />
-          <input type="text" id="instagram" placeholder="Instagram address (optional)" />
-          <input type="text" id="title" placeholder="Enter your title" required />
+          <input type="text" name='postalcode' id="postalcode" placeholder="Enter the postal code" required />
+          <input type="text" name='github' id="github" placeholder="Github address (optional)" />
+          <input type="text" name='linkedin' id="linkedin" placeholder="Linkedin address (optional)" />
+          <input type="text" name='facebook' id="facebook" placeholder="Facebook address (optional)" />
+          <input type="text" name='twitter' id="twitter" placeholder="Twitter address (optional)" />
+          <input type="text" name='instagram' id="instagram" placeholder="Instagram address (optional)" />
+          <input type="text" name='title' id="title" placeholder="Enter your title" required />
+          <textarea name="description" id="" cols="30" rows="10" placeholder="Enter your description"></textarea>
 
           <button className='submit-button' type="submit">Sign Up</button>
         </form>
