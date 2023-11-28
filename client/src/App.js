@@ -1,19 +1,28 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { Toaster } from 'react-hot-toast';
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 import RegisterPage from "./pages/register/RegisterPage";
-
-
+import LoginPage from "./pages/login/LoginPage";
 
 function App() {
   return (
     <div>
-      <Toaster
-        position="top-center"
-        reverseOrder={false}
-      />
+      <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+/>
+<ToastContainer />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<h1>Home</h1>} />
@@ -24,7 +33,7 @@ function App() {
           <Route path="/admin" element={<h1>Admin</h1>} />
           <Route path="/settings" element={<h1>Settings</h1>} />
           <Route path="/dashboard" element={<h1>Dashboard</h1>} />
-          <Route path="/login" element={<h1>Login</h1>} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage/>} />
           <Route path="/forgot-password" element={<h1>Forgot Password</h1>} />
           <Route path="/reset-password" element={<h1>Reset Password</h1>} />

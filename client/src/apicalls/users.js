@@ -1,15 +1,12 @@
 
 import axios from 'axios';
+import { axiosInstance } from '.';
+
 
 // Register user
 export const RegisterUser = async (user) => {
     try {
-        const response = await axios.post('/api/users/register', user,{
-            headers: {
-                'Content-Type': 'application/json',
-                // Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-        });
+        const response = await axiosInstance.post('/api/users/register', user);
         return response.data;
     } catch (error) {
         return error.response.data;
@@ -18,13 +15,9 @@ export const RegisterUser = async (user) => {
 
 // Login user
 export const LoginUser = async (user) => {
+    console.log(process.env.BASE_URL);
     try {
-        const response = await axios.post('/api/users/login', user,{
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-        });
+        const response = await axios.post(`/api/users/login`, user);
         return response.data;
     } catch (error) {
         return error.response.data;

@@ -23,12 +23,11 @@ const userSchema = mongoose.Schema({
     instagram: { type: String, required: false },
     image: { type: String, required: false },
     title: { type: String, required: false },
-    description:{
+    about:{
         type: String,
         required: false
     },
     stacks: [{ type: String, default: 'Full Stack' }],
-    about: { type: String, required: false },
     profilePicture: { type: String, required: false },
     skills:[{
         type: mongoose.Schema.Types.ObjectId,

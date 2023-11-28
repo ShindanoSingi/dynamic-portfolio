@@ -45,6 +45,11 @@ input, textarea {
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+textarea {
+  resize: none;
+  min-height: 100px;
+}
+
 input:focus {
   /* outline: none; */
   border-color: #3498db;

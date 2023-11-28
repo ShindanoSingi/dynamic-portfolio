@@ -1,5 +1,6 @@
 const express = require('express');
 require('dotenv').config({path: '../.env'});
+const cors = require('cors');
 const app = express();
 const dbConfig = require('./config/dbconfig');
 const PORT = process.env.PORT || 8080;
@@ -17,6 +18,13 @@ const teamMembersRoute = require('./routes/teamMembersRoutes');
 const testimonialsRoute = require('./routes/testimonialsRoutes');
 
 app.use(express.json());
+
+
+
+app.use(cors({
+    origin: 'http://localhost:3000'
+}));
+
 
 const server = require('http').createServer(app);
 
