@@ -43,7 +43,6 @@ const LoginPage = () => {
                         localStorage.setItem("user", JSON.stringify(response.user));
                         dispatch(hideLoader());
                         toast.success(response.message);
-                        // navigate("/");
                   } else {
                         dispatch(hideLoader());
                         toast.error(response.message);
@@ -55,12 +54,12 @@ const LoginPage = () => {
        }
       }
 
-      // useEffect(() => {
+      useEffect(() => {
 
-      //       if (localStorage.getItem("token")) {
-      //             navigate("/");
-      //       }
-      // });
+            if (localStorage.getItem("token")) {
+                  navigate("/");
+            }
+      });
 
       return (
             <motion.div
