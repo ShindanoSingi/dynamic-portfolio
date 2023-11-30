@@ -59,6 +59,9 @@ const LoginPage = () => {
             if (localStorage.getItem("token")) {
                   navigate("/");
             }
+            else {
+                  navigate("/login");
+            }
       });
 
       return (
@@ -71,7 +74,7 @@ const LoginPage = () => {
                   <div className="hidden w-full signup-left">
                         <h1>Sign Up</h1>
                   </div>
-                  <div className="signup-right">
+                  <div className="">
                         <motion.div
                               className="signup-form"
                               variants={formVariants}
@@ -80,8 +83,6 @@ const LoginPage = () => {
                         >
                               <h2>Login</h2> <hr required />
                               <form>
-
-
                                     <input
                                           value={user.email}
                                           type="email"
@@ -100,7 +101,7 @@ const LoginPage = () => {
                                           required
                                           onChange={(e) => setUser({ ...user, password: e.target.value })}
                                     />
-                                    <button onClick={
+                                    {/* <button onClick={
                                           (e) => {
                                                 e.preventDefault();
                                                 loginUser();
@@ -108,14 +109,17 @@ const LoginPage = () => {
                                     } className="btn btn-primary"
                                     >
                                           Login
-                                    </button>
+                                    </button> */}
 
-                                    {/* <Button
-                                          onClick={loginUser}
+                                    <Button
+                                          onClick={
+                                                (e) => {
+                                                      e.preventDefault();
+                                                      loginUser();
+                                                }}
                                           label="Login"
                                           text="Sign Up"
-
-                                    /> */}
+                                    />
                               </form>
                               <p className="mt-2 login-link">
                                     Already have an account?{" "}

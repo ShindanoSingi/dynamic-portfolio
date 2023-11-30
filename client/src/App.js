@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import RegisterPage from "./pages/register/RegisterPage";
 import LoginPage from "./pages/login/LoginPage";
+import Particle from "./components/particles/Particles";
 
 function App() {
   return (
@@ -25,7 +26,7 @@ theme="light"
 <ToastContainer />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<h1>Home</h1>} />
+          <Route path="/" element={<Particle/>} />
           <Route path="/about" element={<h1>About</h1>} />
           <Route path="/privacy" element={<h1>Privacy</h1>} />
           <Route path="/product" element={<h1>Product</h1>} />
