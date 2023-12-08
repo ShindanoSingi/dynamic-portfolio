@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import RegisterPage from "./pages/register/RegisterPage";
 import LoginPage from "./pages/login/LoginPage";
 import Home from "./pages/home/Home";
+import About from "./pages/about/About";
 
 function App() {
   return (
@@ -27,7 +28,7 @@ theme="light"
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home/>} />
-          <Route path="/about" element={<h1>About</h1>} />
+          <Route path="/about" element={<About/>} />
           <Route path="/privacy" element={<h1>Privacy</h1>} />
           <Route path="/product" element={<h1>Product</h1>} />
           <Route path="/contact" element={<h1>Contact</h1>} />
