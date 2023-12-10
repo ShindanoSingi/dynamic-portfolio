@@ -6,10 +6,10 @@ const Particle = () => {
             <div className=" max-h-[100vh] text-gray-300 overflow-scroll justify-center container w-[100%]">
                   <motion.div
                         className=" p-4 rounded-lg bg-white border hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-                        // animate={{
-                        //       scale: [1, 1, 1, 1, 1],
-                        //       rotate: [0, 0, 90, 90, 0]
-                        // }}
+                        animate={{
+                              scale: [1, 1, 1, 1, 1],
+                              rotate: [0, 0, 90, 90, 0]
+                        }}
                   >
                         Hello! <br />
                         I'm{" "}
