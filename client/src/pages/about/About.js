@@ -1,14 +1,30 @@
 import * as React from "react";
 import { motion } from "framer-motion";
+import { GetAbout } from "../../apicalls/about";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { showLoader,hideLoader } from "../../redux/loaderSlice";
 
-const Particle = () => {
+const About = () => {
+      const [about, setAbout] = React.useState("");
+
+    //   Get about
+    const getAbout = async () => {
+        try {
+            const response = await GetAbout();
+            setAbout(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
       return (
-            <div className=" max-h-[100vh] text-gray-300 overflow-scroll justify-center container w-[100%]">
-                  <motion.div
-                        className=" p-4 rounded-lg bg-white border hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+            <div className=" h-[100vh] text-gray-300 bg-[#DEDACE] overflow-scroll justify-center container w-[100%]">
+                  {/* <motion.div
+                        className="about-card  p-4 rounded-lg bg-white border  mt-4 dark:bg-gray-800 dark:border-gray-700 hover:border-[--orange-background] hover:bg-[--orange-background] hover:text-[--lightest-text-color]"
                         animate={{
                               scale: [1, 1, 1, 1, 1],
-                              rotate: [0, 0, 90, 90, 0]
+                              rotate: [0, 0, 30, 15, 0]
                         }}
                   >
                         Hello! <br />
@@ -25,10 +41,10 @@ const Particle = () => {
                         </span>{" "}
                         development, I thrive in the dynamic world of technology
                         where creativity meets functionality.
-                  </motion.div>
+                  </motion.div> */}
 
                   <motion.div
-                        className=" p-4 rounded-lg bg-white border hover:bg-gray-100 mt-4 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+                        className="about-card  p-4 rounded-lg bg-white border dark:bg-gray-800 dark:border-gray-700 hover:border-[--orange-background] hover:bg-[--orange-background] hover:text-[--lightest-text-color]"
                         initial={{ opacity: 0, y: -200 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 2 }}
@@ -43,8 +59,8 @@ const Particle = () => {
                         and usability goals.
                   </motion.div>
 
-                  <motion.div
-                        className=" p-4 rounded-lg bg-white border mt-4 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+                  {/* <motion.div
+                        className="about-card  p-4 rounded-lg bg-white border  mt-4 dark:bg-gray-800 dark:border-gray-700 hover:border-[--orange-background] hover:bg-[--orange-background] hover:text-[--lightest-text-color]"
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5, delay: 1 }}
@@ -57,10 +73,10 @@ const Particle = () => {
                         with precision. I'm experienced in database design,
                         optimization, and the implementation of secure
                         authentication systems.
-                  </motion.div>
+                  </motion.div> */}
 
-                  <motion.div
-                        className=" p-4 rounded-lg bg-white border mt-4 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+                  {/* <motion.div
+                        className="about-card  p-4 rounded-lg bg-white border  mt-4 dark:bg-gray-800 dark:border-gray-700 hover:border-[--orange-background] hover:bg-[--orange-background] hover:text-[--lightest-text-color]"
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 1, delay: 2 }}
@@ -73,10 +89,10 @@ const Particle = () => {
                         bottlenecks, integrating cutting-edge features, or
                         troubleshooting intricate issues, I approach every task
                         with a solutions-oriented mindset.
-                  </motion.div>
+                  </motion.div> */}
 
-                  <motion.div
-                        className=" p-4 rounded-lg bg-white border mt-4 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+                  {/* <motion.div
+                        className="about-card  p-4 rounded-lg bg-white border  mt-4 dark:bg-gray-800 dark:border-gray-700 hover:border-[--orange-background] hover:bg-[--orange-background] hover:text-[--lightest-text-color]"
                         initial={{ opacity: 0, x: 100 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 1, delay: 2 }}
@@ -89,10 +105,10 @@ const Particle = () => {
                         seamlessly integrate into cross-functional teams and
                         contribute to the overall success of the development
                         lifecycle.
-                  </motion.div>
+                  </motion.div> */}
 
-                  <motion.div
-                        className=" p-4 rounded-lg bg-white border mt-4 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+                  {/* <motion.div
+                        className="about-card  p-4 rounded-lg bg-white border  mt-4 dark:bg-gray-800 dark:border-gray-700 hover:border-[--orange-background] hover:bg-[--orange-background] hover:text-[--lightest-text-color]"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 1, delay: 2 }}
@@ -104,16 +120,16 @@ const Particle = () => {
                         opportunities to expand my knowledge, attend
                         conferences, and engage in projects that challenge me to
                         push the boundaries of what's possible.
-                  </motion.div>
+                  </motion.div> */}
 
-                  <motion.div
-                        className=" p-4 rounded-lg bg-white border mt-4 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+                  {/* <motion.div
+                        className="about-card  p-4 rounded-lg bg-white border  mt-4 dark:bg-gray-800 dark:border-gray-700 hover:border-[--orange-background] hover:bg-[--orange-background] hover:text-[--lightest-text-color]"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 1, delay: 2 }}
                   >
                         If you're seeking a Full Stack Software Engineer who combines technical expertise with a passion for innovation, I'd love to connect. Let's collaborate on building exceptional digital experiences that leave a lasting impact.
-                  </motion.div>
+                  </motion.div> */}
 
                   {/*
                         <motion.p
@@ -233,4 +249,4 @@ const Particle = () => {
       );
 };
 
-export default Particle;
+export default About;

@@ -8,6 +8,7 @@ import RegisterPage from "./pages/register/RegisterPage";
 import LoginPage from "./pages/login/LoginPage";
 import Home from "./pages/home/Home";
 import About from "./pages/about/About";
+import Header from "./components/header/Header";
 
 function App() {
   return (
@@ -27,7 +28,7 @@ theme="light"
 <ToastContainer />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home/>} />
+          <Route path="/" element={<Header/>} />
           <Route path="/about" element={<About/>} />
           <Route path="/privacy" element={<h1>Privacy</h1>} />
           <Route path="/product" element={<h1>Product</h1>} />
