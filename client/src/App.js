@@ -12,7 +12,8 @@ import About from "./pages/about/About";
 import { GetAllUsers } from "./apicalls/users";
 import { useDispatch } from "react-redux";
 import { hideLoader, showLoader } from "./redux/loaderSlice";
-import { SetUser } from "./redux/userSlice";
+import { SetUser, SetUserAbout, SetUserName, SetUserFirstName, SetUserLastName } from "./redux/userSlice";
+
 
 function App() {
 
@@ -23,8 +24,13 @@ function App() {
       dispatch(showLoader());
       const response = await GetAllUsers();
       console.log(response);
+      console.log(response.users[0].firstName);
       if (response.success === true) {
         dispatch(SetUser(response.users[0]));
+        dispatch(SetUserAbout(response.users[0].about));
+        dispatch(SetUserFirstName(response.users[0].firstName));
+        dispatch(SetUserName(response.users[0].firstName) + ' ' + response.users[0].lastName);
+        dispatch(SetUserLastName(response.users[0].lastName));
         dispatch(hideLoader());
       } else {
         dispatch(hideLoader());

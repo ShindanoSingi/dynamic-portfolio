@@ -35,7 +35,7 @@ router.post("/add-about", authMiddleware, async (req, res) => {
 });
 
 // Get an about
-router.get("/get-about", async (req, res) => {
+router.get("/get-about", authMiddleware, async (req, res) => {
     try {
         // Check if the user with the given userId exist
         const {userId} = req.body;

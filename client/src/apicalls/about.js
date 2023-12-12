@@ -14,7 +14,7 @@ export const AddAbout = async (about) => {
 // Get an about
 export const GetAbout = async () => {
     try {
-        const response = await axiosInstance.get(`/api/about/get-about`);
+        const response = await axios.get(`/api/about/get-about`);
         return response.data;
     } catch (error) {
         return error.response.data;
