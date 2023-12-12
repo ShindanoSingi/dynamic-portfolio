@@ -79,7 +79,7 @@ router.get("/get-certificates", authMiddleware, async (req, res) => {
 });
 
 // Get a single certification
-router.get("/get-certificate/:id", authMiddleware, async (req, res) => {
+router.get("/get-certificate/:id", async (req, res) => {
       try {
             const certificationId = req.params.id;
 

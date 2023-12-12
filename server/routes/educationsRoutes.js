@@ -69,7 +69,7 @@ router.post("/create-education", uploadedImage.single('image'), authMiddleware, 
 });
 
 // Get all educations
-router.get("/get-educations", authMiddleware, async (req, res) => {
+router.get("/get-educations", async (req, res) => {
       try {
             const educations = await Education.find({user: req.body.userId});
 

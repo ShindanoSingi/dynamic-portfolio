@@ -11,12 +11,17 @@ const About = () => {
     //   Get about
     const getAbout = async () => {
         try {
-            const response = await GetAbout();
+            const response = await GetAbout(localStorage.getItem("userId"));
             setAbout(response.data);
+            console.log(response);
         } catch (error) {
             console.log(error);
         }
     };
+
+    useEffect(() => {
+        getAbout();
+    });
 
       return (
             <div className=" h-[100vh] text-gray-300 bg-[#DEDACE] overflow-scroll justify-center container w-[100%]">
@@ -49,14 +54,12 @@ const About = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 2 }}
                   >
-                        On the Front End, I bring to the table proficiency in
-                        crafting seamless and visually appealing user
-                        interfaces. My expertise includes harnessing the power
-                        of modern frameworks such as React and Vue.js to deliver
-                        responsive and user-centric applications. I am
-                        meticulous about creating delightful user experiences,
-                        ensuring that every pixel aligns with the overall design
-                        and usability goals.
+                        {
+                                about.split("*").map((item, i) => {
+                                    return <div><p key={i}>{item}</p><br /></div>
+                                }
+                                )
+                        }
                   </motion.div>
 
                   {/* <motion.div

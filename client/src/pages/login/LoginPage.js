@@ -41,6 +41,7 @@ const LoginPage = () => {
                   if (response.success === true) {
                         localStorage.setItem("token", response.token);
                         localStorage.setItem("user", JSON.stringify(response.user));
+                        localStorage.setItem("userId", response.userId);
                         dispatch(hideLoader());
                         toast.success(response.message);
                   } else {

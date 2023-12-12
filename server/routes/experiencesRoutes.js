@@ -63,7 +63,7 @@ router.post("/create-experience", uploadedImage.single('image'), authMiddleware,
 });
 
 // Get all experiences
-router.get("/get-experiences", authMiddleware, async (req, res) => {
+router.get("/get-experiences", async (req, res) => {
       try {
             const { userId } = req.body;
 

@@ -61,7 +61,7 @@ router.post("/create-skill", uploadedImage.single('image'), authMiddleware, asyn
 });
 
 // Get all skills
-router.get("/get-skills", authMiddleware, async (req, res) => {
+router.get("/get-skills", async (req, res) => {
       const { userId } = req.body;
       try {
             const user = await User.findById(userId);

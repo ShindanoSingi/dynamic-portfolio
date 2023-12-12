@@ -90,7 +90,7 @@ router.post("/create-contact", uploadedImage.single('image'), authMiddleware, as
 });
 
 // Get all certifications
-router.get("/get-contact", authMiddleware, async (req, res) => {
+router.get("/get-contact", async (req, res) => {
       const { userId } = req.body;
       try {
             const user = await User.findById(userId);

@@ -5,20 +5,12 @@ const bcrypt = require("bcryptjs");
 const router = require("express").Router();
 const authMiddleware = require("../middlewares/authMiddleware");
 
-const multer = require("multer");
+// dotenv configuration
+require("dotenv").config();
 
+// Cloudinary
+const cloudinary = require("../cloudinary");
 
-// Configure multer
-const storage = multer.diskStorage({
-    destination: (req, res, cb) => {
-        cb(null, "./images");
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + "--" + file.originalname);
-    }
-});
-
-const uploadedImage = multer({storage: storage})
 
 // User registration
 router.post("/register", async (req, res) => {
@@ -79,6 +71,7 @@ router.post("/login", async (req, res) => {
             message: "Logged in successfully",
             token: token,
             user: user.firstName,
+            userId: user.id,
             success: true,
         });
 
@@ -108,7 +101,7 @@ router.get("/get-current-user", authMiddleware, async (req, res) => {
 });
 
 // Get all users
-router.get("/get-all-users", authMiddleware, async (req, res) => {
+router.get("/get-all-users", async (req, res) => {
     try {
         const users = await User.find();
         return res.send({
@@ -191,38 +184,30 @@ router.delete("/delete-user", authMiddleware, async (req, res) => {
 })
 
 // Upload profile picture
-router.put('/profile-picture', uploadedImage.single('image'), authMiddleware, async (req, res) => {
-    const userId = req.body.userId;
-    const image = req.file.path;
+router.post('/profile-picture', authMiddleware, async (req, res) => {
 
     try {
-        // Check if the file was successfully uploaded
-        if (!req.file || !req.file.path) {
-            return res.send({
-                message: 'File upload failed',
-                success: false,
-            });
-        }
+        // Get image from client
+        const image = req.body.image;
 
-        const updatedUser = await User.findByIdAndUpdate(userId, {
-            profilePicture: image,
-        }, {
-            new: true
+        // Upload image to Cloudinary and get the url from there
+        const uploadedImage = await cloudinary.uploader.upload(image, {
+            folder: 'assets',
         });
 
-        updatedUser.save();
+        //  Update user profile picture
+        const user = await User.findOneAndUpdate(
+        {_id: req.body.userId},
+        {profilePicture: uploadedImage.secure_url},
+         {new: true}
+         );
 
-    if (!updatedUser) {
-      return res.send({
-        success: false,
-        message: 'User not found',
-      });
-    }
+         user.save();
 
     return res.send({
         success: true,
         message: 'Profile picture updated successfully',
-        data:updatedUser,
+        data:user,
     });
 
     } catch (error) {

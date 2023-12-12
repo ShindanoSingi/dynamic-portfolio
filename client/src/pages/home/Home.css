@@ -1,9 +1,13 @@
+:root{
+  --primary-color: #000000;
+}
+
 .panel {
     height: 100vh;
     width: 100vw;
     text-align: center;
   }
-
+  
   .panel span {
     position: relative;
     display: block;

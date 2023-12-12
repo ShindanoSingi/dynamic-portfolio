@@ -67,7 +67,7 @@ router.post("/create-award", uploadedImage.single('image'), authMiddleware, asyn
 });
 
 // Get all awards
-router.get("/get-awards", authMiddleware, async (req, res) => {
+router.get("/get-awards", async (req, res) => {
     try {
     // Check if the user with the given userId exist
     const {userId} = req.body;

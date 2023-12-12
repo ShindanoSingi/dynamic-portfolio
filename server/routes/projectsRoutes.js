@@ -57,7 +57,7 @@ router.post("/create-project", uploadedImage.single('image'), authMiddleware, as
 });
 
 // Get all projects
-router.get("/get-projects", authMiddleware, async (req, res) => {
+router.get("/get-projects", async (req, res) => {
     try {
         const projects = await Project.find({ user: req.body.userId });
         return res.send({

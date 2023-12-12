@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,9 +8,37 @@ import RegisterPage from "./pages/register/RegisterPage";
 import LoginPage from "./pages/login/LoginPage";
 import Home from "./pages/home/Home";
 import About from "./pages/about/About";
-import Header from "./components/header/Header";
+
+import { GetAllUsers } from "./apicalls/users";
+import { useDispatch } from "react-redux";
+import { hideLoader, showLoader } from "./redux/loaderSlice";
+import { SetUser } from "./redux/userSlice";
 
 function App() {
+
+  const dispatch = useDispatch();
+
+  const getUser = async () => {
+    try {
+      dispatch(showLoader());
+      const response = await GetAllUsers();
+      console.log(response);
+      if (response.success === true) {
+        dispatch(SetUser(response.users[0]));
+        dispatch(hideLoader());
+      } else {
+        dispatch(hideLoader());
+      }
+    } catch (error) {
+      dispatch(hideLoader());
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getUser();
+  })
+
   return (
     <div>
       <ToastContainer
@@ -28,7 +56,7 @@ theme="light"
 <ToastContainer />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Header/>} />
+          <Route path="/" element={<Home/>} />
           <Route path="/about" element={<About/>} />
           <Route path="/privacy" element={<h1>Privacy</h1>} />
           <Route path="/product" element={<h1>Product</h1>} />

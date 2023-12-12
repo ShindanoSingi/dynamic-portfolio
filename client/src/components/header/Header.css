@@ -1,0 +1,7 @@
+.trapezoid {
+    width: 100px;
+    height: 50px;
+    background-color: #3498db; /* Optional: Set background color */
+    clip-path: polygon(25% 0, 75% 0, 100% 100%, 0% 100%);
+    margin: 20px; /* Optional: Add margin for spacing */
+}

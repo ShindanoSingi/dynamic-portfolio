@@ -68,7 +68,7 @@ router.post('/projects/:projectId/add-team-member', uploadedImage.single('image'
 });
 
 // Get all team members
-router.get('/projects/:projectId/get-team-members', authMiddleware, async (req, res) => {
+router.get('/projects/:projectId/get-team-members', async (req, res) => {
 try {
     const { projectId } = req.params;
 
