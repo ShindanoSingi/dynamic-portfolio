@@ -13,7 +13,7 @@ function Header() {
       return (
             <div className="">
                   <div className="flex justify-between p-4">{
-                        userFirstName ? <p className="text-white text-4xl">{userFirstName}</p> : <Loader />
+                        !userFirstName ? <p className="text-white text-4xl">{userFirstName}</p> : <Loader/>
                   }
                         <FiAlignJustify className="icon text-white text-4xl" />
                   </div>
