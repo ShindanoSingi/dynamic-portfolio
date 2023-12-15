@@ -1,6 +1,6 @@
 .loader {
-    width: 20px;
-    height: 20px;
+    width: 100px;
+    height: 100px;
      --c: linear-gradient(#E64C3C 0 0);
      --m: radial-gradient(farthest-side,#E64C3C 92%,#0000);
     background:
@@ -10,7 +10,7 @@
       var(--m),
       var(--c),
       var(--m);
-    background-size: 5px 7px,5px 5px;
+    background-size: 30px 30px,30px 30px;
     background-repeat: no-repeat;
     animation: db4 1s infinite alternate;
   }
