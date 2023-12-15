@@ -4,12 +4,8 @@
     box-sizing: border-box;
 }
 
-/* :after {
-    content: "";
-} */
-
 body {
-    padding: 100px 0;
+    /* padding: 100px 0; */
     background: lightblue;
     color: white;
     font-family: 'Montserrat', sans-serif;
@@ -157,7 +153,12 @@ nav ul li div {
     align-items: center;
 }
 
-div > .icon:hover{
+/* div > .icon:hover{
     color: var(--dark-orange-background);
     transform: scale3d(2.2, 2.2, 2.2);
+} */
+
+.twitter-icon:hover, .github-icon:hover, .linkedin-icon:hover{
+    color: var(--dark-orange-background);
+    transform: scale3d(1.3, 1.3, 1.3);
 }

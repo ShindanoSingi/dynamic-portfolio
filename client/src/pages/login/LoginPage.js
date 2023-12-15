@@ -56,7 +56,7 @@ const LoginPage = () => {
       }
 
       useEffect(() => {
-
+            console.log(localStorage.getItem("token").length > 0);
             if (localStorage.getItem("token")) {
                   navigate("/");
             }

@@ -9,7 +9,7 @@ const About = () => {
       const {userAbout} = useSelector((state) => state.userReducer);
 
       return (
-            <div className=" h-[100vh] text-gray-300 bg-[--primary-color] overflow-scroll justify-center container w-[100%]">
+            <div className=" h-[100vh] text-lg text-gray-300 bg-[--primary-color] overflow-scroll justify-center container w-[100%]">
 
                   <motion.div
                         className="about-card  p-4 rounded-lg bg-white border dark:bg-gray-800 dark:border-gray-700 hover:border-[--orange-background] hover:bg-[--orange-background] hover:text-[--lightest-text-color]"

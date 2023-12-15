@@ -4,35 +4,30 @@ import Header from "../../components/header/Header";
 import { useSelector } from "react-redux";
 import Loader from "../../components/loader/Loader";
 import Footer from "../../components/footer/Footer";
+import SideMenu from "../../components/sideMenu/SideMenu";
 
 const Home = () => {
       const { user } = useSelector((state) => state.userReducer);
-      console.log(user);
+      const {show} = useSelector(state => state.userReducer);
+
+      console.log(show);
 
       return (
             <div className="home-container">
-                  <Header className="header" />
+                  <Header />
 
-                  <div className="main">
-                        {user ? (
-                              <div>
-                                    <h1 className="">
-                                          {user.firstName}{" "}
-                                    </h1>
-                                    <div className="image"><img
-                                          className=" z-1"
-                                          src={user.profilePicture}
-                                          alt=""
-                                    /></div>
-
-                              </div>
-                        ) : (
-                              <Loader />
-                        )}
-                  </div>
-
+                  {
+                        show === true  ? <SideMenu /> : <div>
+                              {
+                        user ? <img
+                        src={user.profilePicture}
+                        alt=""
+                  /> : <Loader/>
+                  }
                   <Footer />
-                  <div className="circle-up"></div>
+                        </div>
+                  }
+
             </div>
       );
 };

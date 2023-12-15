@@ -12,82 +12,114 @@ import { IoSchoolSharp } from "react-icons/io5";
 import { BiSolidContact } from "react-icons/bi";
 import { FaCloudDownloadAlt } from "react-icons/fa";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "./SideMenu.css";
+import { SetShow } from "../../redux/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function SideMenu() {
+      const { show } = useSelector((state) => state.userReducer);
+      const dispatch = useDispatch();
+
+      const navigate = useNavigate();
+
       return (
-            <nav className="side flex h-full w-full flex-col justify-center items-center">
+            <nav className="side flex h-full w-full z-1000 flex-col justify-center items-center">
                   <ul className="absolute top-0">
-                        <li>
-                              <Link  className="icon-and-text link" to="/">
-                                    <FaHome className="home-icon icon" />
-                                    <div className="icon-text">Home</div>
-                              </Link>
+                        <li onClick={()=>{
+                              dispatch(SetShow(!show));
+                              navigate("/")
+                        }}>
+                              <FaHome className="home-icon icon" />
+                              <div className="icon-text">Home</div>
                         </li>
 
-                        <li>
-                              <Link className="link icon-and-text" to="/about">
+                        <li onClick={()=>{
+                              dispatch(SetShow(!show));
+                              navigate("/about")
+                        }}>
                                     <FaUser className="user-icon icon" />
                                     <div className="icon-text">About</div>
-                              </Link>
                         </li>
 
-                        <li>
-                              <Link className="link icon-and-text" to="/experience">
+                        <li
+                        onClick={()=>{
+                              dispatch(SetShow(!show));
+                              navigate("/experience")
+                        }}
+                        >
                                     <MdAutoGraph className="experience-icon icon" />
                                     <div className="icon-text">Experience</div>
-                              </Link>
                         </li>
 
-                        <li>
-                              <Link className="link icon-and-text" to="/projects">
+                        <li
+                        onClick={()=>{
+                              dispatch(SetShow(!show));
+                              navigate("/projects")
+                        }}
+                        >
                                     <RiTableFill className="projects-icon icon" />
                                     <div className="icon-text">Projects</div>
-                              </Link>
                         </li>
 
-                        <li>
-                              <Link className="link icon-and-text" to="/skills">
+                        <li
+                        onClick={()=>{
+                              dispatch(SetShow(!show));
+                              navigate("/skills")
+                        }}
+                        >
                                     <RiBarChart2Fill className="skills-icon icon" />
                                     <div className="icon-text">Skills</div>
-                              </Link>
                         </li>
 
-                        <li>
-                              <Link className="link icon-and-text" to="/awards">
+                        <li
+                        onClick={()=>{
+                              dispatch(SetShow(!show));
+                              navigate("/awards")
+                        }}
+                        >
+
                                     <FaAward className="award-icon icon" />
                                     <div className="icon-text">Awards</div>
-                              </Link>
+
                         </li>
 
-                        <li>
-                              <Link className="link icon-and-text" to="/education">
+                        <li
+                        onClick={()=>{
+                              dispatch(SetShow(!show));
+                              navigate("/education")
+                        }}
+                        >
                                     <IoSchoolSharp className="education-icon icon" />
                                     <div className="icon-text">Education</div>
-                              </Link>
                         </li>
 
-
-                              <li><Link className="link icon-and-text" to="/contact">
+                        <li
+                        onClick={()=>{
+                              dispatch(SetShow(!show));
+                              navigate("/contact")
+                        }}
+                        >
                                     <BiSolidContact className="contact-icon icon" />
-                                    <div className="icon-text">Contact</div></Link>
-                              </li>
+                                    <div className="icon-text">Contact</div>
+                        </li>
 
-
-                        <li>
-                              <Link className="link icon-and-text" to="/resume">
+                        <li
+                        onClick={()=>{
+                              dispatch(SetShow(!show));
+                              navigate("/download")
+                        }}
+                        >
                                     <FaCloudDownloadAlt className="download-icon icon" />
                                     <div className="icon-text">Download</div>
-                              </Link>
                         </li>
                   </ul>
                   <div className="grid py-4 bg-[--primary-color] absolute bottom-0 grid-flow-col w-[100vw] place-content-around ">
                         <a
-                        href="https://twitter.com/Shindano_Singi"
-                        target="_blank"
-                        rel="noreferrer"
+                              href="https://twitter.com/Shindano_Singi"
+                              target="_blank"
+                              rel="noreferrer"
                         >
                               <FaTwitter className="twitter-icon icon" />
                         </a>

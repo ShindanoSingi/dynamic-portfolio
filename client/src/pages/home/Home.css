@@ -1,21 +1,22 @@
 
+
 .home-container {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
   background-color: var(--primary-color);
-  height: 100vh;
 
 }
 
-.image{
+img{
   object-fit: cover;
   position: relative;
   z-index: 5;
+  height: max-content;
 }
 
 .footer{
-  position: fixed;
+  position: absolute;
   bottom: 0;
   width: 100%;
   height: 55%;
@@ -27,7 +28,7 @@
   clip-path: polygon(100% 100%, 0 100%, 0 0, 100% 30%);
 }
 
-.panel {
+/* .panel {
     height: 100vh;
     width: 100vw;
     text-align: center;
@@ -39,9 +40,9 @@
     overflow: visible;
     top: 50%;
     font-size: 80px;
-  }
+  } */
 
-  .panel.blue {
+  /* .panel.blue {
     background-color: #3883d8;
   }
 
@@ -56,7 +57,7 @@
 
   .panel.bordeaux {
     background-color: #953543;
-  }
+  } */
 
 
 
