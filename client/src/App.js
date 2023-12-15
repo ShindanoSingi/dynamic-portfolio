@@ -14,7 +14,6 @@ import { useDispatch } from "react-redux";
 import { hideLoader, showLoader } from "./redux/loaderSlice";
 import { SetUser, SetUserAbout, SetUserName, SetUserFirstName, SetUserLastName } from "./redux/userSlice";
 import SideMenu from "./components/sideMenu/SideMenu";
-import Loader from "./components/loader/Loader";
 
 function App() {
 
@@ -63,9 +62,9 @@ theme="light"
 <ToastContainer />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Loader/>} />
+          <Route path="/" element={<Home/>} />
           <Route path="/about" element={<About/>} />
-          <Route path="/privacy" element={<h1>Privacy</h1>} />
+          <Route path="/prijects" element={<h1>Projects</h1>} />
           <Route path="/product" element={<h1>Product</h1>} />
           <Route path="/contact" element={<h1>Contact</h1>} />
           <Route path="/admin" element={<h1>Admin</h1>} />

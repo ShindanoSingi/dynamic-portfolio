@@ -1,3 +1,26 @@
+:root{
+    --lighter-orange-background: #DEDACE;
+    --orange-background: #F06552;
+    --dark-orange-background: #E64C3C;
+    --text-color: #FAFEFD;
+    --dark-text-color: #2D3142;
+    --darker-text-color: #222831;
+    --darkest-text-color: #1E1E24;
+    --light-text-color: #E5E5E5;
+    --lighter-text-color: #F4F1DE;
+    --lightest-text-color: #F9F7F7;
+    --lightest-gray: #F5F5F5;
+    --light-gray: #E5E5E5;
+    --gray: #BDBDBD;
+    --dark-gray: #828282;
+    --darker-gray: #4F4F4F;
+    --darkest-gray: #333333;
+    --lightest-blue: #E0F2FE;
+    --light-blue: #B2EBF2;
+    --blue: #03A9F4;
+    --primary-color: #000000;
+  }
+
 .button{
     border: none;
     border-radius: 5px;
@@ -15,7 +38,7 @@
 }
 
 .primary{
-    background-color: #1e90ff;
+    background-color: var(--dark-orange-background);
     border: none;
 }
 

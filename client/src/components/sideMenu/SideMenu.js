@@ -27,7 +27,9 @@ function SideMenu() {
       return (
             <nav className="side flex h-full w-full z-1000 flex-col justify-center items-center">
                   <ul className="absolute top-0">
-                        <li onClick={()=>{
+                        <li
+                        className="icon-and-text"
+                        onClick={()=>{
                               dispatch(SetShow(!show));
                               navigate("/")
                         }}>
@@ -35,7 +37,9 @@ function SideMenu() {
                               <div className="icon-text">Home</div>
                         </li>
 
-                        <li onClick={()=>{
+                        <li
+                        className="icon-and-text"
+                         onClick={()=>{
                               dispatch(SetShow(!show));
                               navigate("/about")
                         }}>
@@ -44,6 +48,7 @@ function SideMenu() {
                         </li>
 
                         <li
+                        className="icon-and-text"
                         onClick={()=>{
                               dispatch(SetShow(!show));
                               navigate("/experience")
@@ -54,6 +59,7 @@ function SideMenu() {
                         </li>
 
                         <li
+                        className="icon-and-text"
                         onClick={()=>{
                               dispatch(SetShow(!show));
                               navigate("/projects")
@@ -64,6 +70,7 @@ function SideMenu() {
                         </li>
 
                         <li
+                        className="icon-and-text"
                         onClick={()=>{
                               dispatch(SetShow(!show));
                               navigate("/skills")
@@ -74,6 +81,7 @@ function SideMenu() {
                         </li>
 
                         <li
+                        className="icon-and-text"
                         onClick={()=>{
                               dispatch(SetShow(!show));
                               navigate("/awards")
@@ -86,6 +94,7 @@ function SideMenu() {
                         </li>
 
                         <li
+                        className="icon-and-text"
                         onClick={()=>{
                               dispatch(SetShow(!show));
                               navigate("/education")
@@ -96,6 +105,7 @@ function SideMenu() {
                         </li>
 
                         <li
+                        className="icon-and-text"
                         onClick={()=>{
                               dispatch(SetShow(!show));
                               navigate("/contact")
@@ -106,6 +116,7 @@ function SideMenu() {
                         </li>
 
                         <li
+                        className="icon-and-text"
                         onClick={()=>{
                               dispatch(SetShow(!show));
                               navigate("/download")

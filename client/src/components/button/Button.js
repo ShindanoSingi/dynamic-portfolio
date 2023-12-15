@@ -2,10 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Button.css';
 
-const Button = ({label, onClick, color, size, width}) => {
-    const buttonClassName = `button ${color} ${size} ${label} ${width}`;
+const Button = ({label, onClick, color, size, width, fontSize}) => {
+    const buttonClassName = `button ${color} ${size} ${label} ${width} ${fontSize} `;
     const customStyle = {
-        width: width
+        width: width,
+        fontSize: fontSize,
+        widthStyle: width,
+        color: color,
     }
   return (
     <button className={buttonClassName} onClick={onClick} style={customStyle}>
@@ -21,6 +24,7 @@ Button.propTypes = {
     color: PropTypes.oneOf(['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark', 'disabled', 'none']),
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     width: PropTypes.string,
+    fontSize: PropTypes.string,
 }
 
 // Set default values for optional props
@@ -29,6 +33,7 @@ Button.defaultProps = {
     color: 'primary',
     size: 'medium',
     width: 'auto',
+    fontSize: '16px'
 };
 
 export default Button

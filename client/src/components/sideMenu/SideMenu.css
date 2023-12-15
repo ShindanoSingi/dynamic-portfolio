@@ -29,7 +29,7 @@ nav {
     left: 0;
     background: transparent;
     background: var(--dark-orange-background);
-    height: 100lvh;
+    height: 100vh;
 }
 
 nav ul {
@@ -130,12 +130,12 @@ nav ul li:nth-child(9):after {
 }
 
 nav ul li:hover {
-    transform: translateX(-100vw);
+    transform: translateX(-100%) !important;
 }
 
 nav ul li:hover:after {
     opacity: 1;
-    transform: perspective(400px) rotateY(0deg) scale(1);
+    transform: perspective(100vw) rotateY(0deg) scale(1);
 }
 
 nav ul li div {
