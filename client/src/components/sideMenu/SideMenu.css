@@ -1,0 +1,163 @@
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+/* :after {
+    content: "";
+} */
+
+body {
+    padding: 100px 0;
+    background: lightblue;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+    @-webkit-keyframes {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+}
+
+nav {
+    float: left;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: transparent;
+    background: var(--dark-orange-background);
+    height: 100dvh;
+}
+
+nav ul {
+    text-align: center;
+}
+
+nav ul li {
+    position: relative;
+    width: 100vw;
+    cursor: pointer;
+    background: var(--dark-orange-background);
+    text-transform: uppercase;
+    transition: all .4s ease-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav ul li:after {
+    position: absolute;
+    background: white;
+    color: var(--dark-orange-background);
+    top: 0;
+    left: 100vw;
+    width: 100vw;
+    height: 100%;
+    opacity: .5;
+    transform: perspective(400px) rotateY(90deg);
+    transform-origin: 0 100%;
+    transition: all .4s ease-out;
+}
+
+.icon {
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* color: var(--white-text-color); */
+}
+
+li {
+    padding: .9rem;
+}
+
+.experience-icon{
+    font-size: 2.8rem;
+}
+
+nav ul li:nth-child(1):after,
+nav ul li:nth-child(2):after,
+nav ul li:nth-child(3):after,
+nav ul li:nth-child(4):after,
+nav ul li:nth-child(5):after,
+nav ul li:nth-child(6):after,
+nav ul li:nth-child(7):after,
+nav ul li:nth-child(8):after,
+nav ul li:nth-child(9):after
+ {
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav ul li:nth-child(1):after {
+    content: "Home";
+}
+
+nav ul li:nth-child(2):after {
+    content: "About";
+}
+
+nav ul li:nth-child(3):after {
+    content: "Experience";
+}
+
+nav ul li:nth-child(4):after {
+    content: "Projects";
+}
+nav ul li:nth-child(5):after {
+    content: "Skills";
+}
+
+nav ul li:nth-child(6):after {
+    content: "Awards";
+}
+
+nav ul li:nth-child(7):after {
+    content: "Education";
+}
+
+nav ul li:nth-child(8):after {
+    content: "Contact";
+}
+
+nav ul li:nth-child(9):after {
+    content: "Download";
+}
+
+nav ul li:hover {
+    transform: translateX(-100vw);
+}
+
+nav ul li:hover:after {
+    opacity: 1;
+    transform: perspective(400px) rotateY(0deg) scale(1);
+}
+
+nav ul li div {
+    position: relative;
+}
+
+.icon-text{
+    font-size: 1.5rem;
+}
+
+.icon-and-text{
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+div > .icon:hover{
+    color: var(--dark-orange-background);
+    transform: scale3d(2.2, 2.2, 2.2);
+}
