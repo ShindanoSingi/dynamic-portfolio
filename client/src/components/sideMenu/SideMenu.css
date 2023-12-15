@@ -33,7 +33,7 @@ nav {
     left: 0;
     background: transparent;
     background: var(--dark-orange-background);
-    height: 100dvh;
+    height: 100lvh;
 }
 
 nav ul {
@@ -130,7 +130,7 @@ nav ul li:nth-child(8):after {
 }
 
 nav ul li:nth-child(9):after {
-    content: "Download";
+    content: "Download Resume";
 }
 
 nav ul li:hover {
