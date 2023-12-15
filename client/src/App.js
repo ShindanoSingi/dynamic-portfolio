@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { hideLoader, showLoader } from "./redux/loaderSlice";
 import { SetUser, SetUserAbout, SetUserName, SetUserFirstName, SetUserLastName } from "./redux/userSlice";
 import SideMenu from "./components/sideMenu/SideMenu";
+import Error from "./pages/error/Error";
 
 function App() {
 
@@ -74,7 +75,7 @@ theme="light"
           <Route path="/register" element={<RegisterPage/>} />
           <Route path="/forgot-password" element={<h1>Forgot Password</h1>} />
           <Route path="/reset-password" element={<h1>Reset Password</h1>} />
-          <Route path="/:rest*" element={<h1>404</h1>} />
+          <Route path="/:rest*" element={<h1><Error/></h1>} />
         </Routes>
       </BrowserRouter>
     </div>

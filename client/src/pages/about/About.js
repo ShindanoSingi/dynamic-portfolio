@@ -2,8 +2,7 @@ import * as React from "react";
 import { motion } from "framer-motion";
 import { GetAbout } from "../../apicalls/about";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { showLoader, hideLoader } from "../../redux/loaderSlice";
+import { useSelector } from "react-redux";
 import Loader from "../../components/loader/Loader";
 import Button from "../../components/button/Button";
 
