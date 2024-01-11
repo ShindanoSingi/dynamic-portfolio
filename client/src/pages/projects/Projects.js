@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 
 function Projects() {
       const pathName = useLocation().pathname.substring(1);
-      
+
       return (
             <div className="bg-[--primary-color] min-h-[100lvh] pb-2">
                   <div className="mb-2">
