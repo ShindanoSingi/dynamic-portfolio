@@ -62,17 +62,17 @@ router.post("/create-skill", uploadedImage.single('image'), authMiddleware, asyn
 
 // Get all skills
 router.get("/get-skills", async (req, res) => {
-      const { userId } = req.body;
+      // const { userId } = req.body;
       try {
-            const user = await User.findById(userId);
-            if (!user) {
-                  return res.send({
-                        success: false,
-                        message: "User does not exist"
-                  });
-            }
+            // const user = await User.findById(userId);
+            // if (!user) {
+            //       return res.send({
+            //             success: false,
+            //             message: "User does not exist"
+            //       });
+            // }
 
-            const skills = await Skill.find({ user: userId });
+            const skills = await Skill.find({});
 
             console.log(skills);
 

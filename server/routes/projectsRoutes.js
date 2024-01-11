@@ -4,23 +4,12 @@ const Project = require("../models/projectModel");
 const router = require("express").Router();
 const authMiddleware = require("../middlewares/authMiddleware");
 
-const multer = require("multer");
+// Cloudinary
+const cloudinary = require("../cloudinary");
 
-
-// Configure multer
-const storage = multer.diskStorage({
-    destination: (req, res, cb) => {
-        cb(null, "./images");
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + "--" + file.originalname);
-    }
-});
-
-const uploadedImage = multer({storage: storage})
 
 // Create a new project
-router.post("/create-project", uploadedImage.single('image'), authMiddleware, async (req, res) => {
+router.post("/create-project", authMiddleware, async (req, res) => {
     try {
         const userExists = await User.findById(req.body.userId);
 
@@ -31,13 +20,43 @@ router.post("/create-project", uploadedImage.single('image'), authMiddleware, as
             });
         }
 
+        // Get image from client
+        const image = req.body.image;
+
+        // Upload image to Cloudinary and get the url from there
+        const uploadedImage = await cloudinary.uploader.upload(image, {
+            folder: 'assets',
+        });
+
         const newProject = await Project({
-            ...req.body,
-            image: req.file.path,
+            title: req.body.title,
+            problemToSolve: req.body.problemToSolve,
+            description: req.body.description,
+            skills: req.body.skills,
+            technologiesUsed: req.body.technologiesUsed,
+            responsabilities: req.body.responsabilities,
+            challenges: req.body.challenges,
+            testimonials: req.body.testimonials,
+            teamMembers: req.body.teamMembers,
+            awardsAndAchievements: req.body.awardsAndAchievements,
+            projectStatus: req.body.projectStatus,
+            clientContactInformation: req.body.clientContactInformation,
+            live: req.body.live,
+            gitHub: req.body.gitHub,
+            screenshots: req.body.screenshots,
+            video: req.body.video,
+            image: uploadedImage.secure_url,
+            startDate: req.body.startDate,
+            endDate: req.body.endDate,
+            duration: req.body.duration,
+            demoLoginCredentials: req.body.demoLoginCredentials,
+            techStacks: req.body.techStacks,
             user: req.body.userId,
         });
 
         await newProject.save();
+
+        console.log(newProject);
 
         userExists.projects.push(newProject._id);
         await userExists.save();
@@ -49,6 +68,7 @@ router.post("/create-project", uploadedImage.single('image'), authMiddleware, as
         });
 
     } catch (error) {
+        console.log(error);
         return res.send({
             message: error.message,
             success: false,
@@ -217,7 +237,7 @@ router.put("/update-skill/:id", authMiddleware, async (req, res) => {
 });
 
 // Attach a file to the project
-router.put("/attach-file/:id", uploadedImage.single('image'), authMiddleware, async (req, res) => {
+router.put("/attach-file/:id", authMiddleware, async (req, res) => {
     try {
         const project = await Project.findById(req.params.id);
 
@@ -228,13 +248,158 @@ router.put("/attach-file/:id", uploadedImage.single('image'), authMiddleware, as
             });
         }
 
-        project.fileAttachments.push(req.file.path);
+        // Get image from client
+        const image = req.body.image;
+
+        // Upload image to Cloudinary and get the url from there
+        const uploadedImage = await cloudinary.uploader.upload(image, {
+            folder: 'assets',
+        });
+
+        project.screenshots.push(uploadedImage.secure_url);
+
         await project.save();
 
         return res.send({
             message: "File attached successfully",
             success: true,
             data: project,
+        });
+    } catch (error) {
+        return res.send({
+            message: error.message,
+            success: false,
+        });
+    }
+});
+
+// Add Tech Stack
+router.put("/add-tech-stack", authMiddleware, async (req, res) => {
+    try {
+        const project = await Project.findById(req.params.id);
+
+        if (!project) {
+            return res.send({
+                message: "Project not found",
+                success: false,
+            });
+        }
+
+        // Get image from client
+        const image = req.body.image;
+
+        // Upload image to Cloudinary and get the url from there
+        const uploadedImage = await cloudinary.uploader.upload(image, {
+            folder: 'assets',
+        });
+
+        project.techStacks.push({
+            name: req.body.name,
+            image: uploadedImage.secure_url,
+
+        });
+        await project.save();
+
+        return res.send({
+            message: "Tech Stack added successfully",
+            success: true,
+            data: project,
+        });
+    } catch (error) {
+        return res.send({
+            message: error.message,
+            success: false,
+        });
+    }
+});
+
+// Get the tech stacks of a project
+router.get("/get-tech-stacks/:id", async (req, res) => {
+    try {
+        const project = await Project.findById(req.params.id);
+
+        if (!project) {
+            return res.send({
+                message: "Project not found",
+                success: false,
+            });
+        }
+
+        return res.send({
+            message: "Tech Stacks retrieved successfully",
+            success: true,
+            data: project.techStacks,
+        });
+    } catch (error) {
+        return res.send({
+            message: error.message,
+            success: false,
+        });
+    }
+});
+
+// Update the tech stacks of a project
+router.put("/update-tech-stack/:id", authMiddleware, async (req, res) => {
+    try {
+        const project = await Project.findById(req.params.id);
+
+        if (!project) {
+            return res.send({
+                message: "Project not found",
+                success: false,
+            });
+        }
+
+        // Get image from client
+        const image = req.body.image;
+
+        // Upload image to Cloudinary and get the url from there
+        const uploadedImage = await cloudinary.uploader.upload(image, {
+            folder: 'assets',
+        });
+
+        const techStackIndex = project.techStacks.findIndex(techStack => techStack._id == req.body.techStackId);
+
+        project.techStacks[techStackIndex] = {
+            name: req.body.name,
+            image: uploadedImage.secure_url,
+        };
+        await project.save();
+
+        return res.send({
+            message: "Tech Stack updated successfully",
+            success: true,
+            data: project.techStacks[techStackIndex],
+        });
+    } catch (error) {
+        return res.send({
+            message: error.message,
+            success: false,
+        });
+    }
+});
+
+// Delete a tech stack from a project
+router.delete("/delete-tech-stack/:id", authMiddleware, async (req, res) => {
+    try {
+        const project = await Project.findById(req.params.id);
+
+        if (!project) {
+            return res.send({
+                message: "Project not found",
+                success: false,
+            });
+        }
+
+        const techStackIndex = project.techStacks.findIndex(techStack => techStack._id == req.body.techStackId);
+
+        project.techStacks.splice(techStackIndex, 1);
+        await project.save();
+
+        return res.send({
+            message: "Tech Stack deleted successfully",
+            success: true,
+            data: project.techStacks,
         });
     } catch (error) {
         return res.send({

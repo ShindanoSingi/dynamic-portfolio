@@ -6,7 +6,10 @@ const projectSchema = mongoose.Schema({
       problemToSolve: { type: String, required: false },
       description: { type: String, required: false },
       skills: [String],
-      technologiesUsed: [String],
+      technologiesUsed: [{
+            name: { type: String, required: false },
+            image: { type: String, required: false },
+      }],
       responsabilities: [String],
       challenges: [String],
       testimonials: [{
@@ -19,11 +22,11 @@ const projectSchema = mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId, ref: 'Award'
       }],
       projectStatus: { type: String, default: 'Incomplete' },
-      clientContactInformation: {
+      clientContactInformation: [{
             name: { type: String, required: false },
             email: { type: String, required: false },
             phoneNumber: { type: String, required: false },
-      },
+      }],
       live: { type: String, required: false },
       gitHub: { type: String, required: false },
       screenshots: [String],
@@ -36,7 +39,10 @@ const projectSchema = mongoose.Schema({
             type: String,
             required: false,
       },
-      fileAttachments: [String],
+      techStacks: [{
+            name: { type: String, required: false},
+            image: { type: String, required: false},
+      }],
       user: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
