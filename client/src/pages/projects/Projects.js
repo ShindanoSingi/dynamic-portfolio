@@ -1,24 +1,52 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "../../components/button/Button";
 import "./Projects.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { GetProjects } from "../../apicalls/project";
 
 function Projects() {
+      const [projects, setProjects] = React.useState([]);
+
       const pathName = useLocation().pathname.substring(1);
 
+      const navigate = useNavigate();
+
+      const handleBack = () => {
+            navigate("/");
+      }
+
+      const getProjects = async () => {
+            const response = await GetProjects();
+            console.log(response.data);
+            setProjects(response.data);
+      }
+console.log(projects);
+      useEffect(() => {
+            getProjects();
+      },[]);
+
       return (
-            <div className="bg-[--primary-color] min-h-[100lvh] pb-2">
-                  <div className="mb-2">
-                        <Button
+            <div className="bg-[--primary-color] min-h-[100lvh] pb-2 container">
+                  <div className="mb-2 flex justify-between items-center h-[3.5rem] bg-[--info] p-2 rounded-md">
+                        <div>
+                              <Button
                               label={pathName}
                               color="info"
-                              width="100%"
+                              width="0%"
                               fontSize="1.4rem"
                         />
+                        </div>
+
+
+                        <button className="buttonClass font-bold" onClick={handleBack}>Back</button>
                   </div>
 
                   <div className="cards-container">
-                        <div className="max-w-sm rounded overflow-hidden shadow-lg bg-[--orange-background] pb-2 flex-grow">
+                        {projects.length > 0 ?? projects.map((project) => (
+                              <h1>{project.title}</h1>
+                        ))}
+
+                        {/* <div className="max-w-sm rounded overflow-hidden shadow-lg bg-[--orange-background] pb-2 flex-grow">
                               <img
                                     class="w-full "
                                     src="https://images.pexels.com/photos/144474/pexels-photo-144474.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
@@ -90,7 +118,7 @@ function Projects() {
                                           </div>
                                     </div>
                               </div>
-                        </div>
+                        </div> */}
                   </div>
             </div>
       );

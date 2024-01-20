@@ -1,6 +1,7 @@
 .about-card{
     background-color: var(--orange-background);
     color: var(--text-color);
+
 }
 
 .about-card:hover{

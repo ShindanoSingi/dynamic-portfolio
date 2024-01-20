@@ -65,19 +65,8 @@ router.post("/create-experience", uploadedImage.single('image'), authMiddleware,
 // Get all experiences
 router.get("/get-experiences", async (req, res) => {
       try {
-            const { userId } = req.body;
-
-            // Check if user already exists
-            const userExists = await User.findById(userId);
-
-            if (!userExists) {
-                  return res.send({
-                        message: "User not found",
-                        success: false
-                  });
-            }
-
-            const experiences = await Experience.find({ user: userId });
+            // const experiences = await Experience.find().populate('user').populate('experiences');
+            const experiences = await User.find().populate('experience');
 
             return res.send({
                   message: "Experiences fetched successfully",

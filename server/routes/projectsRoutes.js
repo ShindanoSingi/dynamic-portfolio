@@ -79,7 +79,7 @@ router.post("/create-project", authMiddleware, async (req, res) => {
 // Get all projects
 router.get("/get-projects", async (req, res) => {
     try {
-        const projects = await Project.find({ user: req.body.userId });
+        const projects = await Project.find();
         return res.send({
             message: "Projects retrieved successfully",
             success: true,
@@ -121,6 +121,7 @@ router.get("/get-project/:id", authMiddleware, async (req, res) => {
 // Update a project
 router.put("/update-project/:id", authMiddleware, async (req, res) => {
     try {
+        const user = await User.findById(req.body.userId);
         const project = await Project.findByIdAndUpdate(req.params.id, {
             ...req.body,
         });
@@ -133,6 +134,8 @@ router.put("/update-project/:id", authMiddleware, async (req, res) => {
         }
 
         project.save();
+
+        user.Project = project;
 
         return res.send({
             message: "Project updated successfully",

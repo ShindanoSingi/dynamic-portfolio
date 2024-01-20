@@ -13,7 +13,6 @@ import { GetAllUsers } from "./apicalls/users";
 import { useDispatch } from "react-redux";
 import { hideLoader, showLoader } from "./redux/loaderSlice";
 import { SetUser, SetUserAbout, SetUserName, SetUserFirstName, SetUserLastName } from "./redux/userSlice";
-import SideMenu from "./components/sideMenu/SideMenu";
 import Error from "./pages/error/Error";
 import Projects from "./pages/projects/Projects";
 
@@ -25,8 +24,6 @@ function App() {
     try {
       dispatch(showLoader());
       const response = await GetAllUsers();
-      console.log(response);
-      console.log(response.users[0].firstName);
       if (response.success === true) {
         dispatch(SetUser(response.users[0]));
         dispatch(SetUserAbout(response.users[0].about));
@@ -39,7 +36,6 @@ function App() {
       }
     } catch (error) {
       dispatch(hideLoader());
-      console.log(error);
     }
   }
 
