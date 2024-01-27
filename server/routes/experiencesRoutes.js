@@ -122,6 +122,9 @@ router.put("/update-experience/:id", authMiddleware, async (req, res) => {
 
             // Upload image to cloudinary
             const image = req.body.image;
+
+            if (image) {
+
             const uploadedImage = await cloudinary.uploader.upload(image, {
                   folder: 'assets',
             })
@@ -130,6 +133,14 @@ router.put("/update-experience/:id", authMiddleware, async (req, res) => {
                   {
                         ...req.body,
                         image: uploadedImage.secure_url
+                  }
+                  , { new: true });
+
+            }
+
+            const experience = await Experience.findByIdAndUpdate(req.params.id,
+                  {
+                        ...req.body
                   }
                   , { new: true });
 

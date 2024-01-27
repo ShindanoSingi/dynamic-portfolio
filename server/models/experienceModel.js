@@ -1,12 +1,14 @@
 const mongoose = require('mongoose');
 
 const experienceSchema = mongoose.Schema({
-    image: { type: String, required: true },
-    companyName: { type: String, required: true },
-    jobTitle: { type: String, required: true },
-    startDate: { type: Date, required: true },
-    endDate: { type: Date, required: true },
-    description: { type: String, required: true },
+    image: { type: String, required: false},
+    companyName: { type: String, required: false },
+    jobTitle: { type: String, required: false },
+    startDate: { type: String, required: false },
+    endDate: { type: String, required: false },
+    description: { type: String, required: false },
+    city: { type: String, required: false },
+    state: { type: String, required: false },
     user:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
