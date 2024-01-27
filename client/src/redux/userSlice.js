@@ -9,6 +9,7 @@ const userSlice = createSlice({
         userFirstName: null,
         userLastName: null,
         show: false,
+        experiences: null,
     },
     reducers: {
         SetUser: (state,action) => {
@@ -29,8 +30,11 @@ const userSlice = createSlice({
         SetShow: (state,action) => {
             state.show = action.payload;
         },
+        SetExperiences: (state,action) => {
+            state.experiences = action.payload;
+        },
     }
 });
 
-export const {SetUser, SetUserAbout, SetUserName, SetUserFirstName, SetUserLastName, SetShow} = userSlice.actions;
+export const {SetUser, SetUserAbout, SetUserName, SetUserFirstName, SetUserLastName, SetShow, SetExperiences} = userSlice.actions;
 export default userSlice.reducer;

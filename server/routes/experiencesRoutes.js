@@ -60,12 +60,12 @@ router.post("/create-experience", authMiddleware, async (req, res) => {
 router.get("/get-experiences", async (req, res) => {
       try {
             // const experiences = await Experience.find().populate('user').populate('experiences');
-            const experiences = await User.find().populate('experience');
+            const user = await User.find().populate('experience');
 
             return res.send({
                   message: "Experiences fetched successfully",
                   success: true,
-                  data:experiences
+                  data:user[0].experience
             });
       } catch (error) {
             return res.send({

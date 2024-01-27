@@ -7,10 +7,7 @@ const userSchema = mongoose.Schema({
     password: { type: String, required: true},
     phoneNumber: { type: String, required: false},
     role: { type: String, default:'user'},
-    date: {
-        type: Date,
-        default: Date.now
-    },
+    date: {type: Date, default: Date.now},
     streetNumber: { type: String, required: false },
     streetName: { type: String, required: false },
     city: { type: String, required: false },
@@ -23,10 +20,7 @@ const userSchema = mongoose.Schema({
     instagram: { type: String, required: false },
     image: { type: String, required: false },
     title: { type: String, required: false },
-    about:{
-        type: String,
-        required: false
-    },
+    about:{type: String, required: false},
     stacks: [{ type: String, default: 'Full Stack' }],
     profilePicture: { type: String, required: false },
     skills:[{
