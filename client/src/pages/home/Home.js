@@ -24,6 +24,7 @@ const Home = () => {
                         alt=""
                   /> : <Loader/>
                   }
+                  
                   <Footer />
                         </div>
                   }
