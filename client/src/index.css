@@ -54,10 +54,6 @@ body {
   color: var(--white);
   border-color:#1f2f47;
   border-radius: 50rem;
-  /* border-top-left-radius:42px;
-  border-top-right-radius:42px;
-  border-bottom-left-radius:42px;
-  border-bottom-right-radius:42px; */
   box-shadow:inset 0px 0px 15px 3px #23395e;
   text-shadow:inset 0px 1px 0px #263666;
   background-color:transparent;

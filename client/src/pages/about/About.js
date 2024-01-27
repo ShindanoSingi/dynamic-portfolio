@@ -34,7 +34,7 @@ const About = () => {
                   ) : (
                         <>
                               <div className=" h-[100vh]  text-gray-300 bg-[--primary-color] overflow-scroll justify-center container w-[100%]">
-                                    <div className="mb-2 flex justify-between items-center h-[3.5rem] bg-[--info] p-2 rounded-md">
+                                    <div className="mb-2 flex justify-between items-center h-[3.5rem] z-50 bg-[--info] p-2 rounded-md">
                                           <Button
                                                 label={pathName}
                                                 color="info"
@@ -50,9 +50,9 @@ const About = () => {
                                           </button>
                                     </div>
                                     <motion.div
-                                          className="about-card text-lg p-4 rounded-lg mb-2 bg-white border dark:bg-gray-800 dark:border-gray-700 hover:border-[--orange-background] hover:bg-[--orange-background] hover:text-[--lightest-text-color]"
-                                          initial={{ opacity: 0, y: -200 }}
-                                          animate={{ opacity: 1, y: 0 }}
+                                          className="about-card text-lg p-4 rounded-lg z-10 mb-2 bg-white border dark:bg-gray-800 dark:border-gray-700 hover:border-[--orange-background] hover:bg-[--orange-background] hover:text-[--lightest-text-color]"
+                                          initial={{ opacitx: 0, x:-500 }}
+                                          animate={{ opacitx: 1, x: 0 }}
                                           transition={{ duration: 1, delay: 1 }}
                                     >
                                           {about}

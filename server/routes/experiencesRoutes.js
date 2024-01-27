@@ -4,23 +4,10 @@ const Experience= require("../models/experienceModel");
 const router = require("express").Router();
 const authMiddleware = require("../middlewares/authMiddleware");
 
-const multer = require("multer");
-
-
-// Configure multer
-const storage = multer.diskStorage({
-    destination: (req, res, cb) => {
-        cb(null, "./images");
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + "--" + file.originalname);
-    }
-});
-
-const uploadedImage = multer({storage: storage})
+const cloudinary = require("../cloudinary");
 
 // Create a new experience
-router.post("/create-experience", uploadedImage.single('image'), authMiddleware, async (req, res) => {
+router.post("/create-experience", authMiddleware, async (req, res) => {
       try {
             // Get user's Id
             const { userId } = req.body;
@@ -35,10 +22,17 @@ router.post("/create-experience", uploadedImage.single('image'), authMiddleware,
                   });
             }
 
+            // Upload image to cloudinary
+            const image = req.body.image;
+
+            const uploadedImage = await cloudinary.uploader.upload(image, {
+                  folder: 'assets',
+            });
+
             // Create new experience
             const newExperience = new Experience({
                   ...req.body,
-                  image: req.file.path
+                  image: uploadedImage.secure_url
             });
             newExperience.user = userId;
             await newExperience.save();
@@ -112,7 +106,7 @@ router.get("/get-experience/:id", authMiddleware, async (req, res) => {
 });
 
 // Update an experience
-router.put("/update-experience/:id", uploadedImage.single('image'), authMiddleware, async (req, res) => {
+router.put("/update-experience/:id", authMiddleware, async (req, res) => {
       try {
             const { userId } = req.body;
 
@@ -126,10 +120,16 @@ router.put("/update-experience/:id", uploadedImage.single('image'), authMiddlewa
                   });
             }
 
+            // Upload image to cloudinary
+            const image = req.body.image;
+            const uploadedImage = await cloudinary.uploader.upload(image, {
+                  folder: 'assets',
+            })
+
             const experience = await Experience.findByIdAndUpdate(req.params.id,
                   {
                         ...req.body,
-                        image: req.file.path
+                        image: uploadedImage.secure_url
                   }
                   , { new: true });
 

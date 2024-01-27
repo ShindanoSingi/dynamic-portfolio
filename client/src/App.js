@@ -15,6 +15,7 @@ import { hideLoader, showLoader } from "./redux/loaderSlice";
 import { SetUser, SetUserAbout, SetUserName, SetUserFirstName, SetUserLastName } from "./redux/userSlice";
 import Error from "./pages/error/Error";
 import Projects from "./pages/projects/Projects";
+import Experience from "./pages/experience/Experience";
 
 function App() {
 
@@ -62,6 +63,7 @@ theme="light"
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/about" element={<About/>} />
+          <Route path="/experience" element={<Experience/>} />
           <Route path="/projects" element={<Projects/>} />
           <Route path="/product" element={<h1>Product</h1>} />
           <Route path="/contact" element={<h1>Contact</h1>} />
